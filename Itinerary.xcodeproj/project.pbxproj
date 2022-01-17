@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C244B9C32794DFC9008B8D8C /* Trips.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C22794DFC9008B8D8C /* Trips.swift */; };
+		C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */; };
+		C244B9C72794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */; };
 		C29EDDA627935770007159FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA527935770007159FB /* AppDelegate.swift */; };
 		C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA727935770007159FB /* SceneDelegate.swift */; };
-		C29EDDAA27935770007159FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA927935770007159FB /* ViewController.swift */; };
+		C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA927935770007159FB /* TripsViewController.swift */; };
 		C29EDDAD27935770007159FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C29EDDAB27935770007159FB /* Main.storyboard */; };
 		C29EDDB027935770007159FB /* Itinerary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDAE27935770007159FB /* Itinerary.xcdatamodeld */; };
-		C29EDDB227935771007159FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C29EDDB127935771007159FB /* Assets.xcassets */; };
+		C29EDDB227935771007159FB /* i.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C29EDDB127935771007159FB /* i.xcassets */; };
 		C29EDDB527935771007159FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C29EDDB327935771007159FB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C244B9C22794DFC9008B8D8C /* Trips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trips.swift; sourceTree = "<group>"; };
+		C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
+		C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MochiyPopPOne-Regular.ttf"; sourceTree = "<group>"; };
 		C29EDDA227935770007159FB /* Itinerary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itinerary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29EDDA527935770007159FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C29EDDA727935770007159FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C29EDDA927935770007159FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C29EDDA927935770007159FB /* TripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewController.swift; sourceTree = "<group>"; };
 		C29EDDAC27935770007159FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C29EDDAF27935770007159FB /* Itinerary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Itinerary.xcdatamodel; sourceTree = "<group>"; };
-		C29EDDB127935771007159FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C29EDDB127935771007159FB /* i.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = i.xcassets; sourceTree = "<group>"; };
 		C29EDDB427935771007159FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C29EDDB627935771007159FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -39,6 +45,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C244B9BF2794DE12008B8D8C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C29EDDAB27935770007159FB /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C244B9C02794DE22008B8D8C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C29EDDA927935770007159FB /* TripsViewController.swift */,
+				C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C244B9C12794DE2F008B8D8C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C244B9C22794DFC9008B8D8C /* Trips.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C244B9C82794F7AC008B8D8C /* Founts */ = {
+			isa = PBXGroup;
+			children = (
+				C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */,
+			);
+			path = Founts;
+			sourceTree = "<group>";
+		};
 		C29EDD9927935770007159FB = {
 			isa = PBXGroup;
 			children = (
@@ -60,9 +99,11 @@
 			children = (
 				C29EDDA527935770007159FB /* AppDelegate.swift */,
 				C29EDDA727935770007159FB /* SceneDelegate.swift */,
-				C29EDDA927935770007159FB /* ViewController.swift */,
-				C29EDDAB27935770007159FB /* Main.storyboard */,
-				C29EDDB127935771007159FB /* Assets.xcassets */,
+				C244B9C82794F7AC008B8D8C /* Founts */,
+				C244B9C12794DE2F008B8D8C /* Model */,
+				C244B9BF2794DE12008B8D8C /* View */,
+				C244B9C02794DE22008B8D8C /* Controller */,
+				C29EDDB127935771007159FB /* i.xcassets */,
 				C29EDDB327935771007159FB /* LaunchScreen.storyboard */,
 				C29EDDB627935771007159FB /* Info.plist */,
 				C29EDDAE27935770007159FB /* Itinerary.xcdatamodeld */,
@@ -129,7 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C29EDDB527935771007159FB /* LaunchScreen.storyboard in Resources */,
-				C29EDDB227935771007159FB /* Assets.xcassets in Resources */,
+				C29EDDB227935771007159FB /* i.xcassets in Resources */,
+				C244B9C72794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf in Resources */,
 				C29EDDAD27935770007159FB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,7 +183,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C29EDDAA27935770007159FB /* ViewController.swift in Sources */,
+				C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */,
+				C244B9C32794DFC9008B8D8C /* Trips.swift in Sources */,
+				C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */,
 				C29EDDB027935770007159FB /* Itinerary.xcdatamodeld in Sources */,
 				C29EDDA627935770007159FB /* AppDelegate.swift in Sources */,
 				C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */,
