@@ -24,7 +24,10 @@ class TripsViewController: UIViewController {
         trips.append(Trips(id: UUID(), name: "new zlanda"))
     }
 
-
+    @IBAction func addTrip(_ sender: UIBarButtonItem) {
+        
+    }
+    
 }
 
 //MARK: - UITableViewDelegate
@@ -43,7 +46,11 @@ extension TripsViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell") as! TripsTableViewCell
         cell.title.text = trips[indexPath.row].name
+        if indexPath.row == 2 {
+            return cell
+        }
         cell.backgroundImage.image=UIImage(named: "image")
+        cell.backgroundColor=UIColor.clear
       
         return cell
     }
