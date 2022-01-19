@@ -10,19 +10,24 @@ import UIKit
 
 class AddTrip : UIViewController {
     
+    @IBOutlet weak var addimageButton: UIButton!
     
-    @IBOutlet weak var coveView: UIView!
+    @IBOutlet weak var coverImage: UIImageView!
+    @IBOutlet weak var textFiled: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        coveView.layer.cornerRadius=20
+        coverImage.layer.cornerRadius=20
     }
-    @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
+    @IBAction func cancelPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addImage(_ sender: UIBarButtonItem) {
+    
+    @IBAction func addImage(_ sender: UIButton) {
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
     }
+    
 }

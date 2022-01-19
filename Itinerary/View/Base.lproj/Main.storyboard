@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -76,7 +77,7 @@
                             <color key="tintColor" name="tint"/>
                             <connections>
                                 <action selector="addTrip:" destination="BYZ-38-t0r" id="XIh-Yj-qsl"/>
-                                <segue destination="Ru8-6n-6Wl" kind="presentation" id="VUJ-U1-Ab9"/>
+                                <segue destination="xgM-fm-ef3" kind="presentation" id="Dmk-HB-MPm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -88,7 +89,7 @@
             </objects>
             <point key="canvasLocation" x="902.89855072463774" y="118.52678571428571"/>
         </scene>
-        <!--New Trip-->
+        <!--Add Trip-->
         <scene sceneID="lsN-Fr-qyH">
             <objects>
                 <viewController id="xgM-fm-ef3" customClass="AddTrip" customModule="Itinerary" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,65 +97,93 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-gk-TaH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="title trip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-ba-TBV">
+                                <rect key="frame" x="20" y="70.5" width="374" height="34"/>
+                                <color key="backgroundColor" name="fled"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jT9-Me-nLT">
+                                <rect key="frame" x="5" y="15" width="404" height="35.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-ba-TBV">
-                                        <rect key="frame" x="20" y="78" width="374" height="34"/>
-                                        <color key="backgroundColor" name="fled"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItV-Jl-JH4">
-                                        <rect key="frame" x="20" y="132" width="374" height="38"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53a-G6-vWQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="133.5" height="35.5"/>
+                                        <color key="tintColor" name="tint"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Cancel">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="xgM-fm-ef3" eventType="touchUpInside" id="4FB-rX-X1v"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsD-1Q-OS4">
+                                        <rect key="frame" x="135.5" y="0.0" width="133" height="35.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7i-Ay-Itu">
+                                        <rect key="frame" x="270.5" y="0.0" width="133.5" height="35.5"/>
                                         <color key="tintColor" name="tint"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Add">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="addPressed:" destination="xgM-fm-ef3" eventType="touchUpInside" id="oyc-Pt-Oz8"/>
+                                            <action selector="addPressed:" destination="xgM-fm-ef3" eventType="touchUpInside" id="EfO-Az-kD9"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3P-uc-7cF">
+                                <rect key="frame" x="10" y="144.5" width="394" height="120"/>
+                                <color key="backgroundColor" name="fled"/>
+                                <color key="tintColor" name="tint"/>
                                 <constraints>
-                                    <constraint firstItem="ItV-Jl-JH4" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="20" id="0v7-Mm-X1O"/>
-                                    <constraint firstAttribute="trailing" secondItem="ItV-Jl-JH4" secondAttribute="trailing" constant="20" id="DD8-wt-ANI"/>
-                                    <constraint firstItem="fQI-ba-TBV" firstAttribute="leading" secondItem="eXe-gk-TaH" secondAttribute="leading" constant="20" id="DTk-XE-S3D"/>
-                                    <constraint firstItem="ItV-Jl-JH4" firstAttribute="leading" secondItem="eXe-gk-TaH" secondAttribute="leading" constant="20" id="bWx-PP-iAe"/>
-                                    <constraint firstAttribute="trailing" secondItem="fQI-ba-TBV" secondAttribute="trailing" constant="20" id="hQl-6P-Fd1"/>
-                                    <constraint firstAttribute="height" constant="200" id="hzX-3c-chK"/>
-                                    <constraint firstAttribute="bottom" secondItem="ItV-Jl-JH4" secondAttribute="bottom" constant="30" id="vav-ys-kAQ"/>
+                                    <constraint firstAttribute="height" constant="120" id="gCb-7l-Ht4"/>
                                 </constraints>
-                            </view>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgH-Gi-hSe">
+                                <rect key="frame" x="10" y="144.5" width="394" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="fg0-BE-2q4"/>
+                                </constraints>
+                                <color key="tintColor" name="tint"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title=" add image">
+                                    <imageReference key="image" image="photo.on.rectangle.angled" catalog="system" symbolScale="large"/>
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addImage:" destination="xgM-fm-ef3" eventType="touchUpInside" id="EPH-om-0MH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1sj-rf-agf"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eXe-gk-TaH" firstAttribute="top" secondItem="iJ5-67-cQw" secondAttribute="top" id="4l6-52-Awd"/>
-                            <constraint firstItem="eXe-gk-TaH" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" id="dk6-x9-8aV"/>
-                            <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="eXe-gk-TaH" secondAttribute="trailing" id="gfy-Nr-MoM"/>
+                            <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="i3P-uc-7cF" secondAttribute="trailing" constant="10" id="Dl4-QF-Rwz"/>
+                            <constraint firstItem="IgH-Gi-hSe" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="F6Q-6f-no0"/>
+                            <constraint firstItem="i3P-uc-7cF" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="FkI-zM-uwp"/>
+                            <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="IgH-Gi-hSe" secondAttribute="trailing" constant="10" id="Hxi-Ac-Agy"/>
+                            <constraint firstItem="jT9-Me-nLT" firstAttribute="leading" secondItem="iJ5-67-cQw" secondAttribute="leading" constant="5" id="Jr3-5U-ma8"/>
+                            <constraint firstAttribute="trailing" secondItem="jT9-Me-nLT" secondAttribute="trailing" constant="5" id="Q1d-K8-1of"/>
+                            <constraint firstItem="fQI-ba-TBV" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="20" id="U29-qu-K5V"/>
+                            <constraint firstItem="jT9-Me-nLT" firstAttribute="top" secondItem="iJ5-67-cQw" secondAttribute="top" constant="15" id="YDv-Jz-DfK"/>
+                            <constraint firstItem="IgH-Gi-hSe" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="Z7I-cq-Qsz"/>
+                            <constraint firstItem="fQI-ba-TBV" firstAttribute="top" secondItem="jT9-Me-nLT" secondAttribute="bottom" constant="20" id="nQ2-Kk-hDn"/>
+                            <constraint firstItem="i3P-uc-7cF" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="rpo-tc-UG2"/>
+                            <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="fQI-ba-TBV" secondAttribute="trailing" constant="20" id="z3d-eF-fdv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Trip" id="xDD-sO-CWl">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="nHK-kX-cw3">
-                            <color key="tintColor" name="tint"/>
-                            <connections>
-                                <action selector="cancelPressed:" destination="xgM-fm-ef3" id="WB9-Yi-LCp"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="cy2-CG-VTj">
-                            <color key="tintColor" name="tint"/>
-                            <connections>
-                                <action selector="addImage:" destination="xgM-fm-ef3" id="7r7-nd-SoL"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="coveView" destination="eXe-gk-TaH" id="Ea4-sg-PRh"/>
+                        <outlet property="addimageButton" destination="IgH-Gi-hSe" id="9So-TY-Ymb"/>
+                        <outlet property="coverImage" destination="i3P-uc-7cF" id="jUJ-7E-5aj"/>
+                        <outlet property="textFiled" destination="fQI-ba-TBV" id="ctb-Fk-j2c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30y-6p-7rs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -179,27 +208,9 @@
             </objects>
             <point key="canvasLocation" x="53.623188405797109" y="124.55357142857142"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ikO-Pk-004">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ru8-6n-6Wl" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w9n-Pr-Jt0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="backgroundCard"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xgM-fm-ef3" kind="relationship" relationship="rootViewController" id="8oh-77-KhJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1he-JR-h7F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1734.7826086956522" y="118.52678571428571"/>
-        </scene>
     </scenes>
     <resources>
+        <image name="photo.on.rectangle.angled" catalog="system" width="128" height="100"/>
         <namedColor name="background">
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
@@ -212,8 +223,8 @@
         <namedColor name="tint">
             <color red="0.92100000381469727" green="0.30300000309944153" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
