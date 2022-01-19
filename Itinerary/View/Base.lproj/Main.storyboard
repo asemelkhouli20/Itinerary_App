@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UxP-NI-hjT">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_0" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -20,43 +20,59 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TripsViewController" customModule="Itinerary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Voe-0d-Sqg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="756"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tripCell" rowHeight="120" id="E3c-BG-4Sh" customClass="TripsTableViewCell" customModule="Itinerary" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="E3c-BG-4Sh" id="Tv5-XO-ypR">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5n6-ge-25m">
-                                                    <rect key="frame" x="10" y="10" width="394" height="100"/>
-                                                    <color key="backgroundColor" name="backgroundCard"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trip name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzb-FX-SYH">
-                                                    <rect key="frame" x="11" y="33" width="392" height="53"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="MochiyPopPOne-Regular" family="Mochiy Pop P One" pointSize="30"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qiJ-Zi-ydk">
+                                                    <rect key="frame" x="10" y="10" width="370" height="100"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5n6-ge-25m">
+                                                            <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
+                                                            <color key="backgroundColor" name="backgroundCard"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzb-FX-SYH">
+                                                            <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
+                                                            <fontDescription key="fontDescription" name="MochiyPopPOne-Regular" family="Mochiy Pop P One" pointSize="30"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="5n6-ge-25m" firstAttribute="leading" secondItem="qiJ-Zi-ydk" secondAttribute="leading" id="0Al-ti-D7K"/>
+                                                        <constraint firstItem="xzb-FX-SYH" firstAttribute="leading" secondItem="qiJ-Zi-ydk" secondAttribute="leading" id="SjJ-Xm-Dnb"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5n6-ge-25m" secondAttribute="trailing" id="Tjl-Mh-dbt"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5n6-ge-25m" secondAttribute="bottom" id="eA7-X1-l68"/>
+                                                        <constraint firstItem="5n6-ge-25m" firstAttribute="top" secondItem="qiJ-Zi-ydk" secondAttribute="top" id="l84-8E-sUh"/>
+                                                        <constraint firstItem="xzb-FX-SYH" firstAttribute="top" secondItem="qiJ-Zi-ydk" secondAttribute="top" id="lEv-et-WxG"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xzb-FX-SYH" secondAttribute="trailing" id="mpb-76-q0r"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xzb-FX-SYH" secondAttribute="bottom" id="rZi-Rn-vo8"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="5n6-ge-25m" secondAttribute="trailing" constant="10" id="3tW-m6-jss"/>
-                                                <constraint firstItem="5n6-ge-25m" firstAttribute="top" secondItem="Tv5-XO-ypR" secondAttribute="top" constant="10" id="TXn-5J-n6X"/>
-                                                <constraint firstAttribute="bottom" secondItem="5n6-ge-25m" secondAttribute="bottom" constant="10" id="axH-1g-b9G"/>
-                                                <constraint firstItem="5n6-ge-25m" firstAttribute="leading" secondItem="Tv5-XO-ypR" secondAttribute="leading" constant="10" id="fVL-2O-LWA"/>
+                                                <constraint firstAttribute="trailing" secondItem="qiJ-Zi-ydk" secondAttribute="trailing" constant="10" id="1yW-lf-Lpf"/>
+                                                <constraint firstAttribute="bottom" secondItem="qiJ-Zi-ydk" secondAttribute="bottom" constant="10" id="KZI-H0-Cae"/>
+                                                <constraint firstItem="qiJ-Zi-ydk" firstAttribute="leading" secondItem="Tv5-XO-ypR" secondAttribute="leading" constant="10" id="Ok6-JY-pto"/>
+                                                <constraint firstItem="qiJ-Zi-ydk" firstAttribute="top" secondItem="Tv5-XO-ypR" secondAttribute="top" constant="10" id="RBw-eR-zj0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="backgroundImage" destination="5n6-ge-25m" id="dkQ-rr-nS7"/>
+                                            <outlet property="cellView" destination="qiJ-Zi-ydk" id="2yz-dB-nH5"/>
                                             <outlet property="title" destination="xzb-FX-SYH" id="mQM-XW-sJs"/>
                                         </connections>
                                     </tableViewCell>
@@ -94,20 +110,20 @@
             <objects>
                 <viewController id="xgM-fm-ef3" customClass="AddTripViewController" customModule="Itinerary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iJ5-67-cQw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="title trip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-ba-TBV">
-                                <rect key="frame" x="20" y="70.5" width="374" height="34"/>
+                                <rect key="frame" x="20" y="70.666666666666671" width="350" height="34"/>
                                 <color key="tintColor" name="tint"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jT9-Me-nLT">
-                                <rect key="frame" x="5" y="15" width="404" height="35.5"/>
+                                <rect key="frame" x="5" y="14.999999999999996" width="380" height="35.666666666666657"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53a-G6-vWQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="133.5" height="35.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="125.33333333333333" height="35.666666666666664"/>
                                         <color key="tintColor" name="tint"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Cancel">
@@ -118,13 +134,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsD-1Q-OS4">
-                                        <rect key="frame" x="135.5" y="0.0" width="133" height="35.5"/>
+                                        <rect key="frame" x="127.33333333333334" y="0.0" width="125.33333333333334" height="35.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7i-Ay-Itu">
-                                        <rect key="frame" x="270.5" y="0.0" width="133.5" height="35.5"/>
+                                        <rect key="frame" x="254.66666666666671" y="0.0" width="125.33333333333334" height="35.666666666666664"/>
                                         <color key="tintColor" name="tint"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Add">
@@ -136,16 +152,25 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3P-uc-7cF">
-                                <rect key="frame" x="10" y="144.5" width="394" height="120"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3P-uc-7cF">
+                                <rect key="frame" x="10" y="144.66666666666666" width="370" height="119.99999999999997"/>
                                 <color key="backgroundColor" name="fled"/>
                                 <color key="tintColor" name="tint"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="gCb-7l-Ht4"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pL-F1-CWl">
+                                <rect key="frame" x="10" y="145" width="370" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="IB1-EJ-2WC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MochiyPopPOne-Regular" family="Mochiy Pop P One" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgH-Gi-hSe">
-                                <rect key="frame" x="10" y="144.5" width="394" height="120"/>
+                                <rect key="frame" x="10" y="144.66666666666666" width="370" height="119.99999999999997"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="fg0-BE-2q4"/>
                                 </constraints>
@@ -168,10 +193,13 @@
                             <constraint firstItem="i3P-uc-7cF" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="FkI-zM-uwp"/>
                             <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="IgH-Gi-hSe" secondAttribute="trailing" constant="10" id="Hxi-Ac-Agy"/>
                             <constraint firstItem="jT9-Me-nLT" firstAttribute="leading" secondItem="iJ5-67-cQw" secondAttribute="leading" constant="5" id="Jr3-5U-ma8"/>
+                            <constraint firstItem="5pL-F1-CWl" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="Kjh-Ui-oqP"/>
                             <constraint firstAttribute="trailing" secondItem="jT9-Me-nLT" secondAttribute="trailing" constant="5" id="Q1d-K8-1of"/>
                             <constraint firstItem="fQI-ba-TBV" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="20" id="U29-qu-K5V"/>
                             <constraint firstItem="jT9-Me-nLT" firstAttribute="top" secondItem="iJ5-67-cQw" secondAttribute="top" constant="15" id="YDv-Jz-DfK"/>
                             <constraint firstItem="IgH-Gi-hSe" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="Z7I-cq-Qsz"/>
+                            <constraint firstItem="5pL-F1-CWl" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="aAl-6v-CiY"/>
+                            <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="5pL-F1-CWl" secondAttribute="trailing" constant="10" id="bCh-gu-ZSS"/>
                             <constraint firstItem="fQI-ba-TBV" firstAttribute="top" secondItem="jT9-Me-nLT" secondAttribute="bottom" constant="20" id="nQ2-Kk-hDn"/>
                             <constraint firstItem="i3P-uc-7cF" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="rpo-tc-UG2"/>
                             <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="fQI-ba-TBV" secondAttribute="trailing" constant="20" id="z3d-eF-fdv"/>
@@ -184,6 +212,7 @@
                         <outlet property="addimageButton" destination="IgH-Gi-hSe" id="9So-TY-Ymb"/>
                         <outlet property="coverImage" destination="i3P-uc-7cF" id="jUJ-7E-5aj"/>
                         <outlet property="textFiled" destination="fQI-ba-TBV" id="ctb-Fk-j2c"/>
+                        <outlet property="tripName" destination="5pL-F1-CWl" id="ci1-3j-nfC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30y-6p-7rs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,7 +225,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UxP-NI-hjT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Q1-ZM-RaX">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -224,6 +253,9 @@
         <namedColor name="tint">
             <color red="0.92100000381469727" green="0.30300000309944153" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
