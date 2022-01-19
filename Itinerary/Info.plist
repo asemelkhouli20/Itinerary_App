@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>we need image to show it as background for your trip </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>we need image to show it as background for your trip </string>
+	<key>NSCameraUsageDescription</key>
+	<string>we need image to show it as background for your trip </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MochiyPopPOne-Regular.ttf</string>

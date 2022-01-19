@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct Trips {
     let id : UUID
     let name:String
+    let tripImage:UIImage?
 }
 //MochiyPopPOne-Regular

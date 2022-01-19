@@ -77,7 +77,7 @@
                             <color key="tintColor" name="tint"/>
                             <connections>
                                 <action selector="addTrip:" destination="BYZ-38-t0r" id="XIh-Yj-qsl"/>
-                                <segue destination="xgM-fm-ef3" kind="presentation" id="Dmk-HB-MPm"/>
+                                <segue destination="xgM-fm-ef3" kind="presentation" identifier="toAddTrip" id="Dmk-HB-MPm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -89,17 +89,17 @@
             </objects>
             <point key="canvasLocation" x="902.89855072463774" y="118.52678571428571"/>
         </scene>
-        <!--Add Trip-->
+        <!--Add Trip View Controller-->
         <scene sceneID="lsN-Fr-qyH">
             <objects>
-                <viewController id="xgM-fm-ef3" customClass="AddTrip" customModule="Itinerary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xgM-fm-ef3" customClass="AddTripViewController" customModule="Itinerary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iJ5-67-cQw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="title trip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-ba-TBV">
                                 <rect key="frame" x="20" y="70.5" width="374" height="34"/>
-                                <color key="backgroundColor" name="fled"/>
+                                <color key="tintColor" name="tint"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -131,7 +131,7 @@
                                             <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="addPressed:" destination="xgM-fm-ef3" eventType="touchUpInside" id="EfO-Az-kD9"/>
+                                            <action selector="addPressed:" destination="xgM-fm-ef3" eventType="touchUpInside" id="TsN-gf-81B"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -209,6 +209,7 @@
             <point key="canvasLocation" x="53.623188405797109" y="124.55357142857142"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="tint"/>
     <resources>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="100"/>
         <namedColor name="background">

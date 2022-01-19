@@ -11,7 +11,7 @@
 		C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */; };
 		C244B9C72794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */; };
 		C244B9CA2794FD5A008B8D8C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C92794FD5A008B8D8C /* Colors.xcassets */; };
-		C244B9D027952722008B8D8C /* AddTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9CF27952722008B8D8C /* AddTrip.swift */; };
+		C244B9D027952722008B8D8C /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9CF27952722008B8D8C /* AddTripViewController.swift */; };
 		C29EDDA627935770007159FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA527935770007159FB /* AppDelegate.swift */; };
 		C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA727935770007159FB /* SceneDelegate.swift */; };
 		C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA927935770007159FB /* TripsViewController.swift */; };
@@ -26,7 +26,7 @@
 		C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
 		C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MochiyPopPOne-Regular.ttf"; sourceTree = "<group>"; };
 		C244B9C92794FD5A008B8D8C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		C244B9CF27952722008B8D8C /* AddTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrip.swift; sourceTree = "<group>"; };
+		C244B9CF27952722008B8D8C /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		C29EDDA227935770007159FB /* Itinerary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Itinerary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29EDDA527935770007159FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C29EDDA727935770007159FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 			children = (
 				C29EDDA927935770007159FB /* TripsViewController.swift */,
 				C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */,
-				C244B9CF27952722008B8D8C /* AddTrip.swift */,
+				C244B9CF27952722008B8D8C /* AddTripViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -191,7 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */,
-				C244B9D027952722008B8D8C /* AddTrip.swift in Sources */,
+				C244B9D027952722008B8D8C /* AddTripViewController.swift in Sources */,
 				C244B9C32794DFC9008B8D8C /* Trips.swift in Sources */,
 				C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */,
 				C29EDDB027935770007159FB /* Itinerary.xcdatamodeld in Sources */,

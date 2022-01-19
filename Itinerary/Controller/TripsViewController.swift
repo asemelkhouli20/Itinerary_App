@@ -18,14 +18,24 @@ class TripsViewController: UIViewController {
         tableView.delegate=self
         tableView.dataSource=self
         //marke date
-        trips.append(Trips(id: UUID(), name: "new zlanda"))
-        trips.append(Trips(id: UUID(), name: "new zlanda"))
-        trips.append(Trips(id: UUID(), name: "new zlanda"))
-        trips.append(Trips(id: UUID(), name: "new zlanda"))
+        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: nil))
+        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image")))
+        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: nil))
+        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image")))
     }
+    
 
     @IBAction func addTrip(_ sender: UIBarButtonItem) {
         
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAddTrip" {
+            let popup = segue.destination as! AddTripViewController
+            popup.passData = { [weak self] in
+                self?.trips.append(popup.newTrip)
+                self?.tableView.reloadData()
+            }
+        }
     }
     
 }
@@ -46,10 +56,7 @@ extension TripsViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell") as! TripsTableViewCell
         cell.title.text = trips[indexPath.row].name
-        if indexPath.row == 2 {
-            return cell
-        }
-        cell.backgroundImage.image=UIImage(named: "image")
+        cell.backgroundImage.image=trips[indexPath.row].tripImage
         cell.backgroundColor=UIColor.clear
       
         return cell
