@@ -162,7 +162,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pL-F1-CWl">
-                                <rect key="frame" x="10" y="145" width="370" height="120"/>
+                                <rect key="frame" x="10" y="144.66666666666666" width="370" height="119.99999999999997"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="IB1-EJ-2WC"/>
                                 </constraints>
@@ -212,6 +212,8 @@
                     <connections>
                         <outlet property="addimageButton" destination="IgH-Gi-hSe" id="9So-TY-Ymb"/>
                         <outlet property="coverImage" destination="i3P-uc-7cF" id="jUJ-7E-5aj"/>
+                        <outlet property="doneButtone" destination="z7i-Ay-Itu" id="vw2-Lq-Wxy"/>
+                        <outlet property="navgationTitle" destination="GsD-1Q-OS4" id="hz1-Zd-saU"/>
                         <outlet property="textFiled" destination="fQI-ba-TBV" id="ctb-Fk-j2c"/>
                         <outlet property="tripName" destination="5pL-F1-CWl" id="ci1-3j-nfC"/>
                     </connections>

@@ -49,7 +49,7 @@ class TripsViewController: UIViewController {
                 }
             }
             tripForEdit=nil
-            
+            editOnIndex=nil
         }
     }
     
@@ -105,15 +105,7 @@ extension TripsViewController:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell") as! TripsTableViewCell
-        cell.title.text = trips[indexPath.row].name
-        if let image = trips[indexPath.row].tripImage {
-            cell.backgroundImage.image=image
-            cell.backgroundColor=UIColor.clear
-        }
-        else{
-            cell.backgroundImage.image=nil
-            cell.backgroundImage.backgroundColor=UIColor(named: "backgroundCard")
-        }
+        cell.setupCell(trip: trips[indexPath.row])
         return cell
     }
     

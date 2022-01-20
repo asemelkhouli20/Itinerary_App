@@ -16,6 +16,8 @@ class AddTripViewController : UIViewController {
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var textFiled: UITextField!
     
+    @IBOutlet weak var navgationTitle: UILabel!
+    @IBOutlet weak var doneButtone: UIButton!
     var newTrip : Trips!
     var tripForEdit:Trips?
     var tripImage:UIImage?
@@ -32,6 +34,8 @@ class AddTripViewController : UIViewController {
             textFiled.text=trip.name
             coverImage.image=trip.tripImage
             updateCover()
+            navgationTitle.text="Edit Trip"
+            doneButtone.setTitle("Save", for: .normal)
             
         }
     }
