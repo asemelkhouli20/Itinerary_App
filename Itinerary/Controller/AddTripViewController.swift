@@ -43,7 +43,7 @@ class AddTripViewController : UIViewController {
     @IBAction func cancelPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-   
+    
     @IBAction func addImage(_ sender: UIButton) {
         askTheUserToChooseTheSource()
     }
@@ -62,35 +62,6 @@ class AddTripViewController : UIViewController {
     
     
     //MARK: - Help methods
-     func presentImagePickerController() {
-         DispatchQueue.main.sync {
-            let myPickerImage=UIImagePickerController()
-            myPickerImage.delegate=self
-             present(myPickerImage, animated: true, completion: nil)}
-    }
-    //make sure the source are available and make request Authorization and present the picker if user authorized
-    func imagePicker(isSourcPhotoType:UIImagePickerController.SourceType) {
-        if UIImagePickerController.isSourceTypeAvailable(isSourcPhotoType){
-            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (statue) in
-                switch statue {
-                case .authorized:
-                    self.presentImagePickerController()
-                case .notDetermined:
-                    if statue == PHAuthorizationStatus.authorized {
-                        self.presentImagePickerController()
-                    }
-                case .restricted:
-                    self.makeAlert(title: "Photo Library Restricted", message: "Photo Library access is restricted and cannot be accessed")
-                case .denied:
-                    self.goToSetting()
-                 default:
-                    break
-                }//end switch
-            }//END PHPhotoLibrary
-        }else{
-            makeAlert(title: "source not available", message: "soory but your device doesn't have this resource")
-        }
-    }
     
     //go to sitting
     func goToSetting (){
@@ -161,12 +132,46 @@ extension AddTripViewController : UIImagePickerControllerDelegate,UINavigationCo
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let userPicerImage = info[.originalImage] as? UIImage {
+        if let userPicerImage = info[.editedImage] as? UIImage {
             coverImage.image = userPicerImage
             self.tripImage=userPicerImage
-            //make lable update
-            updateCover()
-            picker.dismiss(animated: true, completion: nil)
+        }else if let userPicerImage = info[.originalImage] as? UIImage {
+            coverImage.image = userPicerImage
+            self.tripImage=userPicerImage
+        }
+        //make lable update
+        updateCover()
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func presentImagePickerController() {
+        DispatchQueue.main.sync {
+            let myPickerImage=UIImagePickerController()
+            myPickerImage.delegate=self
+            myPickerImage.allowsEditing=true
+            present(myPickerImage, animated: true, completion: nil)}
+    }
+    //make sure the source are available and make request Authorization and present the picker if user authorized
+    func imagePicker(isSourcPhotoType:UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(isSourcPhotoType){
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { (statue) in
+                switch statue {
+                case .authorized:
+                    self.presentImagePickerController()
+                case .notDetermined:
+                    if statue == PHAuthorizationStatus.authorized {
+                        self.presentImagePickerController()
+                    }
+                case .restricted:
+                    self.makeAlert(title: "Photo Library Restricted", message: "Photo Library access is restricted and cannot be accessed")
+                case .denied:
+                    self.goToSetting()
+                default:
+                    break
+                }//end switch
+            }//END PHPhotoLibrary
+        }else{
+            makeAlert(title: "source not available", message: "soory but your device doesn't have this resource")
         }
     }
     
