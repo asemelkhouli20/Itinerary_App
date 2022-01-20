@@ -47,22 +47,28 @@ class AddTripViewController : UIViewController {
     
     
     //MARK: - Help methods
-    
+     func presentImagePickerController() {
+         DispatchQueue.main.sync {
+            let myPickerImage=UIImagePickerController()
+            myPickerImage.delegate=self
+             present(myPickerImage, animated: true, completion: nil)}
+    }
     //make sure the source are available and make request Authorization and present the picker if user authorized
     func imagePicker(isSourcPhotoType:UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(isSourcPhotoType){
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { (statue) in
                 switch statue {
                 case .authorized:
-                    //open it in main threed
-                    DispatchQueue.main.sync {
-                        let myPickerImage=UIImagePickerController()
-                        myPickerImage.delegate=self
-                        
-                        self.present(myPickerImage, animated: true, completion: nil)
+                    self.presentImagePickerController()
+                case .notDetermined:
+                    if statue == PHAuthorizationStatus.authorized {
+                        self.presentImagePickerController()
                     }
-                default:
-                    self.makeAlert(title: " privacy error", message: "please allow to access to your resourse to take your image and make it to background to make your trip more Beautiful")
+                case .restricted:
+                    self.makeAlert(title: "Photo Library Restricted", message: "Photo Library access is restricted and cannot be accessed")
+                case .denied:
+                    self.goToSetting()
+                 default:
                     break
                 }//end switch
             }//END PHPhotoLibrary
@@ -70,6 +76,24 @@ class AddTripViewController : UIViewController {
             makeAlert(title: "source not available", message: "soory but your device doesn't have this resource")
         }
     }
+    
+    //go to sitting
+    func goToSetting (){
+        let alert = UIAlertController(title: "Photo Library denied", message: "Photo Library access was previosly denied. Please go to settings if you wish to change this", preferredStyle: .alert)
+        
+        let actionGoToSetting = UIAlertAction(title: "Go To sittings", style: .default) { action in
+            DispatchQueue.main.async { if let url = URL(string: UIApplication.openSettingsURLString){ UIApplication.shared.open(url, options: [:], completionHandler: nil)  }    }   }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(cancelAction)
+        alert.addAction(actionGoToSetting)
+        
+        DispatchQueue.main.sync {
+            alert.view.tintColor=UIColor.red
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
     //make alert method
     func makeAlert(title:String,message:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

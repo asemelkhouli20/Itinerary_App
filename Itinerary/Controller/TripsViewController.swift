@@ -56,7 +56,11 @@ extension TripsViewController:UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell") as! TripsTableViewCell
         cell.title.text = trips[indexPath.row].name
-        cell.backgroundImage.image=trips[indexPath.row].tripImage
+        if let image = trips[indexPath.row].tripImage {
+            cell.backgroundImage.image=image
+        }
+            
+       
         cell.backgroundColor=UIColor.clear
       
         return cell
