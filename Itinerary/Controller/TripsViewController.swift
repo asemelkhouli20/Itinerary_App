@@ -18,10 +18,10 @@ class TripsViewController: UIViewController {
         tableView.delegate=self
         tableView.dataSource=self
         //marke date
-        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: nil))
+        trips.append(Trips(id: UUID(), name: "Go to Bail", tripImage: nil))
         trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image")))
-        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: nil))
-        trips.append(Trips(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image")))
+        trips.append(Trips(id: UUID(), name: "Trip to cairo", tripImage: nil))
+        trips.append(Trips(id: UUID(), name: "Sangfora", tripImage: UIImage(named: "image")))
     }
     
 
@@ -45,6 +45,8 @@ extension TripsViewController :UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
+    
 }
 
 //MARK: - UITableViewDataSource
@@ -58,11 +60,12 @@ extension TripsViewController:UITableViewDataSource{
         cell.title.text = trips[indexPath.row].name
         if let image = trips[indexPath.row].tripImage {
             cell.backgroundImage.image=image
+            cell.backgroundColor=UIColor.clear
         }
-            
-       
-        cell.backgroundColor=UIColor.clear
-      
+        else{
+            cell.backgroundImage.image=nil
+            cell.backgroundImage.backgroundColor=UIColor(named: "backgroundCard")
+        }
         return cell
     }
     
