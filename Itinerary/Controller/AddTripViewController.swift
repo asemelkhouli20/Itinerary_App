@@ -17,13 +17,23 @@ class AddTripViewController : UIViewController {
     @IBOutlet weak var textFiled: UITextField!
     
     var newTrip : Trips!
+    var tripForEdit:Trips?
     var tripImage:UIImage?
     var passData : (()->())?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textFiled.delegate=self
         coverImage.layer.cornerRadius=20
+        //edit mode on
+        if let trip = tripForEdit {
+            textFiled.text=trip.name
+            coverImage.image=trip.tripImage
+            updateCover()
+            
+        }
     }
     
     @IBAction func cancelPressed(_ sender: UIButton) {
@@ -41,6 +51,7 @@ class AddTripViewController : UIViewController {
         newTrip=Trips(id: UUID(), name: newTripTitle, tripImage: tripImage)
         //back to main view and pass the data
         if passData != nil{ passData!()  }
+        
         self.dismiss(animated: true, completion: nil)
     }
     

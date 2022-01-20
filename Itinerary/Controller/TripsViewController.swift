@@ -11,6 +11,9 @@ class TripsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var trips = [Trips]()
+    
+    var tripForEdit:Trips?
+    var editOnIndex:Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +34,22 @@ class TripsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAddTrip" {
             let popup = segue.destination as! AddTripViewController
-            popup.passData = { [weak self] in
-                self?.trips.append(popup.newTrip)
-                self?.tableView.reloadData()
+            
+            popup.tripForEdit=tripForEdit
+            
+            if let index = editOnIndex {
+                popup.passData = { [weak self] in
+                    self?.trips[index]=popup.newTrip
+                    self?.tableView.reloadData()
+                }
+            }else {
+                popup.passData = { [weak self] in
+                    self?.trips.append(popup.newTrip!)
+                    self?.tableView.reloadData()
+                }
             }
+            tripForEdit=nil
+            
         }
     }
     
@@ -68,6 +83,18 @@ extension TripsViewController :UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
+    //edit
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "edit") { (contextualAction, view,performAction: @escaping (Bool) -> Void) in
+            self.tripForEdit=self.trips[indexPath.row]
+            self.editOnIndex=indexPath.row
+            self.performSegue(withIdentifier: "toAddTrip", sender: nil)
+            
+        }
+        edit.image=UIImage(systemName: "pencil")
+        edit.backgroundColor=UIColor.systemBlue
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
 }
 
 //MARK: - UITableViewDataSource
