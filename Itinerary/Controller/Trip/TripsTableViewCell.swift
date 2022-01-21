@@ -23,7 +23,7 @@ class TripsTableViewCell: UITableViewCell {
         title.textColor=UIColor.white
         
     }
-    func setupCell(trip:Trips){
+    func setupCell(trip:TripModel){
         title.text = trip.name
         if let image = trip.tripImage {
             backgroundImage.alpha=0.3

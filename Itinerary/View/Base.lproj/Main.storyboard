@@ -100,6 +100,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Voe-0d-Sqg" id="bO3-9I-rzB"/>
+                        <segue destination="KHd-rm-wM7" kind="show" identifier="activaty" id="1DU-xQ-dt7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -220,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30y-6p-7rs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2644.9275362318845" y="118.52678571428571"/>
+            <point key="canvasLocation" x="902" y="-574"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JIF-BM-n3L">
@@ -240,6 +241,16 @@
             </objects>
             <point key="canvasLocation" x="53.623188405797109" y="124.55357142857142"/>
         </scene>
+        <!--Activaty-->
+        <scene sceneID="jV6-WR-R0o">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Activaty" id="KHd-rm-wM7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="f8d-d5-g9f"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TPy-DP-4eM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785" y="124"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="tint"/>
     <resources>
@@ -251,10 +262,10 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="fled">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="tint">
-            <color red="0.92100000381469727" green="0.30300000309944153" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.92199999094009399" green="0.30199998617172241" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

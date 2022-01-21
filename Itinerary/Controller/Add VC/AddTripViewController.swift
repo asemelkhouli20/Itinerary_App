@@ -18,8 +18,8 @@ class AddTripViewController : UIViewController {
     
     @IBOutlet weak var navgationTitle: UILabel!
     @IBOutlet weak var doneButtone: UIButton!
-    var newTrip : Trips!
-    var tripForEdit:Trips?
+    var newTrip : TripModel!
+    var tripForEdit:TripModel?
     var tripImage:UIImage?
     var passData : (()->())?
     
@@ -52,7 +52,11 @@ class AddTripViewController : UIViewController {
         //make sure text filed not empty and change the text filrd to alert the user
         guard textFiled.text != "", let newTripTitle = textFiled.text else {  textFilrdIsEmpty(); return }
         //save new trip
-        newTrip=Trips(id: UUID(), name: newTripTitle, tripImage: tripImage)
+        if tripForEdit != nil {
+            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: tripForEdit?.days)
+        }else {
+            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: nil)
+        }
         //back to main view and pass the data
         if passData != nil{ passData!()  }
         
