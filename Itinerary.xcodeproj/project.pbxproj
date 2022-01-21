@@ -27,6 +27,7 @@
 		C2B417B3279A53E2004C7F00 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417B2279A53E2004C7F00 /* HeaderTableViewCell.swift */; };
 		C2B417B5279A6E2A004C7F00 /* ActivatyTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417B4279A6E2A004C7F00 /* ActivatyTypeEnum.swift */; };
 		C2B417B7279A7F5E004C7F00 /* ActivatyType.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2B417B6279A7F5E004C7F00 /* ActivatyType.xcassets */; };
+		C2DED22A279A954200AA81A2 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DED229279A954200AA81A2 /* Help.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		C2B417B2279A53E2004C7F00 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C2B417B4279A6E2A004C7F00 /* ActivatyTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatyTypeEnum.swift; sourceTree = "<group>"; };
 		C2B417B6279A7F5E004C7F00 /* ActivatyType.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ActivatyType.xcassets; sourceTree = "<group>"; };
+		C2DED229279A954200AA81A2 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			children = (
 				C29EDDA527935770007159FB /* AppDelegate.swift */,
 				C29EDDA727935770007159FB /* SceneDelegate.swift */,
+				C2DED229279A954200AA81A2 /* Help.swift */,
 				C244B9C92794FD5A008B8D8C /* Colors.xcassets */,
 				C2B417B6279A7F5E004C7F00 /* ActivatyType.xcassets */,
 				C244B9C82794F7AC008B8D8C /* Founts */,
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2DED22A279A954200AA81A2 /* Help.swift in Sources */,
 				C2B417A4279A2DF2004C7F00 /* ActivatyTableViewController.swift in Sources */,
 				C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */,
 				C244B9D027952722008B8D8C /* AddTripViewController.swift in Sources */,

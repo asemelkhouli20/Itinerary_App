@@ -79,7 +79,7 @@ class AddTripViewController : UIViewController {
         alert.addAction(actionGoToSetting)
         
         DispatchQueue.main.sync {
-            alert.view.tintColor=UIColor.red
+            alert.view.tintColor=Help.tint
             present(alert, animated: true, completion: nil)
         }
     }
@@ -89,7 +89,7 @@ class AddTripViewController : UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "done", style: .default, handler: nil)
         alert.addAction(action)
-        alert.view.tintColor=UIColor.red
+        alert.view.tintColor=Help.tint
         
         present(alert, animated: true, completion: nil)
     }
@@ -115,7 +115,7 @@ class AddTripViewController : UIViewController {
         imagePuckerSheet.addAction(photoAction)
         imagePuckerSheet.addAction(cancelAction)
         //change the tint Color to red ‏because blue is default
-        imagePuckerSheet.view.tintColor=UIColor.red
+        imagePuckerSheet.view.tintColor=Help.tint
         //present the sheet
         present(imagePuckerSheet, animated: true, completion: nil)
     }

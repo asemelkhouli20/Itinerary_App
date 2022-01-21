@@ -18,7 +18,7 @@ class TripsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         cellView.layer.cornerRadius = 20
-        title.backgroundColor=UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        
         title.layer.cornerRadius=20
         title.textColor=UIColor.white
         
@@ -28,6 +28,7 @@ class TripsTableViewCell: UITableViewCell {
         if let image = trip.tripImage {
             backgroundImage.alpha=0.3
             backgroundImage.image=image
+            title.backgroundColor=UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
             UIView.animate(withDuration: 1) {
                 self.backgroundImage.alpha=1
             }
@@ -35,7 +36,9 @@ class TripsTableViewCell: UITableViewCell {
         }
         else{
             backgroundImage.image=nil
-            backgroundImage.backgroundColor=UIColor(named: "backgroundCard")
+            backgroundImage.backgroundColor=Help.backgroundCard
+            title.backgroundColor=UIColor.clear
+            title.textColor=Help.bored
         }
     }
     

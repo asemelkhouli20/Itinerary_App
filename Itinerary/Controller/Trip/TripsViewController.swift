@@ -61,7 +61,7 @@ class TripsViewController: UIViewController {
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toAddTrip" {
+        if segue.identifier == Help.toAddTripVC {
             let popup = segue.destination as! AddTripViewController
             popup.tripForEdit=tripForEdit
             
@@ -71,7 +71,7 @@ class TripsViewController: UIViewController {
             }
             tripForEdit=nil; editOnIndex=nil
             
-        }else if segue.identifier == "activaty"{
+        }else if segue.identifier == Help.goToActivatyVC{
             
             let activatyVC = segue.destination as? ActivatyTableViewController
             activatyVC?.tripModel=trips[indexForSelectTrip!]
@@ -97,7 +97,7 @@ class TripsViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 actionPerformanc(false)
             }))
-            alert.view.tintColor=UIColor.red
+            alert.view.tintColor=Help.tint
             self.present(alert, animated: true, completion: nil)
         }
         delete.image=UIImage(systemName: "trash")
@@ -108,7 +108,7 @@ class TripsViewController: UIViewController {
         let edit = UIContextualAction(style: .normal, title: "edit") { (contextualAction, view,performAction: @escaping (Bool) -> Void) in
             self.tripForEdit=self.trips[indexPath.row]
             self.editOnIndex=indexPath.row
-            self.performSegue(withIdentifier: "toAddTrip", sender: nil)
+            self.performSegue(withIdentifier: Help.toAddTripVC, sender: nil)
         }
         edit.image=UIImage(systemName: "pencil")
         edit.backgroundColor=UIColor.systemBlue
@@ -124,7 +124,7 @@ extension TripsViewController :UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexForSelectTrip=indexPath.row
-        performSegue(withIdentifier: "activaty", sender: self)
+        performSegue(withIdentifier: Help.goToActivatyVC, sender: self)
     }
     
 }
@@ -136,7 +136,7 @@ extension TripsViewController:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell") as! TripsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Help.tripCell) as! TripsTableViewCell
         cell.setupCell(trip: trips[indexPath.row])
         return cell
     }

@@ -20,7 +20,7 @@ class ActivatyTableViewCell: UITableViewCell {
         super.awakeFromNib()
         additionImage.layer.borderWidth = 2
         additionImage.layer.masksToBounds = false
-        additionImage.layer.borderColor = UIColor(named: "Bored")?.cgColor
+        additionImage.layer.borderColor = Help.bored?.cgColor
         additionImage.layer.cornerRadius = additionImage.frame.height/2
         additionImage.clipsToBounds = true
         
