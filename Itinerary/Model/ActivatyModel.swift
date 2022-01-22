@@ -8,9 +8,9 @@
 import Foundation
 
 struct ActivatyModel {
-    let title:String
-    let subTitle:String
-    let imageActivaty:ActivatyType
+    var title:String
+    var subTitle:String
+    var imageActivaty:ActivatyType
 }
 
 

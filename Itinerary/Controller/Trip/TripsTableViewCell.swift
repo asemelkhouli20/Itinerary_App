@@ -36,9 +36,9 @@ class TripsTableViewCell: UITableViewCell {
         }
         else{
             backgroundImage.image=nil
-            backgroundImage.backgroundColor=Help.backgroundCard
+            backgroundImage.backgroundColor=Help.backgroundCardColor
             title.backgroundColor=UIColor.clear
-            title.textColor=Help.bored
+            title.textColor=Help.boredColor
         }
     }
     

@@ -6,12 +6,11 @@
 //
 
 import Foundation
-enum ActivatyType {
+enum ActivatyType:Int {
     case fly
     case Hotel
     case taxi
     case restaurant
     case explore
-    
     
 }

@@ -23,10 +23,10 @@ class TripsViewController: UIViewController {
         tableView.delegate=self
         tableView.dataSource=self
         //marke date
-        trips.append(TripModel(id: UUID(), name: "Go to Bail", tripImage: nil, days: nil))
-        trips.append(TripModel(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image"), days: nil))
-        trips.append(TripModel(id: UUID(), name: "Trip to cairo", tripImage: nil, days: nil))
-        trips.append(TripModel(id: UUID(), name: "Sangfora", tripImage: UIImage(named: "image"), days: nil))
+        trips.append(TripModel(id: UUID(), name: "Go to Bail", tripImage: nil, days: []))
+        trips.append(TripModel(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image"), days: []))
+        trips.append(TripModel(id: UUID(), name: "Trip to cairo", tripImage: nil, days: []))
+        trips.append(TripModel(id: UUID(), name: "Sangfora", tripImage: UIImage(named: "image"), days: []))
         //mark data complete
         trips.append(TripModel(id: UUID(), name: "Back From Egypt", tripImage: nil, days: [
             DayModel(title: "Septmper 12", subTitle: "whatch", activaty: [
@@ -60,8 +60,10 @@ class TripsViewController: UIViewController {
     @IBAction func addTrip(_ sender: UIBarButtonItem) {
         
     }
+    
+    //MARK: - Prepare for segue addTripVC/activatyVC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Help.toAddTripVC {
+        if segue.identifier == Help.AddTripVC {
             let popup = segue.destination as! AddTripViewController
             popup.tripForEdit=tripForEdit
             
@@ -71,10 +73,14 @@ class TripsViewController: UIViewController {
             }
             tripForEdit=nil; editOnIndex=nil
             
-        }else if segue.identifier == Help.goToActivatyVC{
+        }else if segue.identifier == Help.ActivatyTableVC{
             
             let activatyVC = segue.destination as? ActivatyTableViewController
             activatyVC?.tripModel=trips[indexForSelectTrip!]
+            activatyVC?.updateTripsModel = {[weak self] in
+                self?.trips[(self!.indexForSelectTrip!)]=activatyVC!.tripModel!
+                
+            }
         }
     }
     
@@ -97,7 +103,7 @@ class TripsViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 actionPerformanc(false)
             }))
-            alert.view.tintColor=Help.tint
+            alert.view.tintColor=Help.tintColor
             self.present(alert, animated: true, completion: nil)
         }
         delete.image=UIImage(systemName: "trash")
@@ -108,7 +114,7 @@ class TripsViewController: UIViewController {
         let edit = UIContextualAction(style: .normal, title: "edit") { (contextualAction, view,performAction: @escaping (Bool) -> Void) in
             self.tripForEdit=self.trips[indexPath.row]
             self.editOnIndex=indexPath.row
-            self.performSegue(withIdentifier: Help.toAddTripVC, sender: nil)
+            self.performSegue(withIdentifier: Help.AddTripVC, sender: nil)
         }
         edit.image=UIImage(systemName: "pencil")
         edit.backgroundColor=UIColor.systemBlue
@@ -124,7 +130,7 @@ extension TripsViewController :UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexForSelectTrip=indexPath.row
-        performSegue(withIdentifier: Help.goToActivatyVC, sender: self)
+        performSegue(withIdentifier: Help.ActivatyTableVC, sender: self)
     }
     
 }

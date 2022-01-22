@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C22FD1BC279BE9250055F3DB /* AddActivatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */; };
 		C244B9C32794DFC9008B8D8C /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C22794DFC9008B8D8C /* TripModel.swift */; };
 		C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */; };
 		C244B9C72794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivatyViewController.swift; sourceTree = "<group>"; };
 		C244B9C22794DFC9008B8D8C /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
 		C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
 		C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MochiyPopPOne-Regular.ttf"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				C244B9CF27952722008B8D8C /* AddTripViewController.swift */,
+				C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */,
 			);
 			path = "Add VC";
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				C2B417A6279A3E4A004C7F00 /* DayModel.swift in Sources */,
 				C2B417B5279A6E2A004C7F00 /* ActivatyTypeEnum.swift in Sources */,
 				C2B417A8279A3E5A004C7F00 /* ActivatyModel.swift in Sources */,
+				C22FD1BC279BE9250055F3DB /* AddActivatyViewController.swift in Sources */,
 				C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

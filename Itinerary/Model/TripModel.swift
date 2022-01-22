@@ -10,8 +10,8 @@ import UIKit
 
 struct TripModel {
     let id : UUID
-    let name:String
-    let tripImage:UIImage?
-    let days:[DayModel]?
+    var name:String
+    var tripImage:UIImage?
+    var days:[DayModel]
 }
 //MochiyPopPOne-Regular

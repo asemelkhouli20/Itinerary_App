@@ -53,9 +53,9 @@ class AddTripViewController : UIViewController {
         guard textFiled.text != "", let newTripTitle = textFiled.text else {  textFilrdIsEmpty(); return }
         //save new trip
         if tripForEdit != nil {
-            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: tripForEdit?.days)
+            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: tripForEdit!.days)
         }else {
-            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: nil)
+            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: [])
         }
         //back to main view and pass the data
         if passData != nil{ passData!()  }
@@ -79,7 +79,7 @@ class AddTripViewController : UIViewController {
         alert.addAction(actionGoToSetting)
         
         DispatchQueue.main.sync {
-            alert.view.tintColor=Help.tint
+            alert.view.tintColor=Help.tintColor
             present(alert, animated: true, completion: nil)
         }
     }
@@ -89,7 +89,7 @@ class AddTripViewController : UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "done", style: .default, handler: nil)
         alert.addAction(action)
-        alert.view.tintColor=Help.tint
+        alert.view.tintColor=Help.tintColor
         
         present(alert, animated: true, completion: nil)
     }
@@ -115,7 +115,7 @@ class AddTripViewController : UIViewController {
         imagePuckerSheet.addAction(photoAction)
         imagePuckerSheet.addAction(cancelAction)
         //change the tint Color to red ‏because blue is default
-        imagePuckerSheet.view.tintColor=Help.tint
+        imagePuckerSheet.view.tintColor=Help.tintColor
         //present the sheet
         present(imagePuckerSheet, animated: true, completion: nil)
     }
