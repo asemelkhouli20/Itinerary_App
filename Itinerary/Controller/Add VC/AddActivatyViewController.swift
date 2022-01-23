@@ -20,9 +20,11 @@ class AddActivatyViewController: UIViewController {
     
     
     var tripModel:TripModel?
-    var indexSelect=0
     var typeActivatySelecte=0
+    
+    var indexSelect=0
     var updateTripModel:(()->())?
+    var indexSelectActivityForEdit:IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +32,44 @@ class AddActivatyViewController: UIViewController {
         pickerView.delegate=self
         titleTextFiled.delegate=self
         addButton.isEnabled=false
+        //editMode
+        if let index = indexSelectActivityForEdit {
+            addButton.isEnabled=true
+            let activaaty=tripModel?.days[index.section].activaty[index.row]
+            titleTextFiled.text=activaaty?.title
+            subTitleTextFiled.text=activaaty?.subTitle
+            addButton.setTitle("Save", for: .normal)
+            typeActivaty.forEach({$0.tintColor=UIColor.systemGray})
+            let selectButton = activaaty?.imageActivaty.rawValue
+            typeActivaty.forEach({if $0.tag == selectButton{$0.tintColor=Help.tintColor;typeActivatySelecte=$0.tag}})
+            indexSelect=index.section
+            
+            pickerView.selectRow(index.section, inComponent: 0, animated: true)
+        }
 
+        
+       
+        
         // Do any additional setup after loading the view.
     }
+    
+    fileprivate func addNewActivaty(_ title: String) {
+        tripModel?.days[indexSelect].activaty.append(ActivatyModel(title: title, subTitle: subTitleTextFiled.text ?? "", imageActivaty: ActivatyType(rawValue: typeActivatySelecte)!))
+    }
+    
     @IBAction func addPressed(_ sender: UIButton) {
         if let title = titleTextFiled.text{
-            
-            tripModel?.days[indexSelect].activaty.append(ActivatyModel(title: title, subTitle: titleTextFiled.text ?? "", imageActivaty: ActivatyType(rawValue: typeActivatySelecte)!))
+            if let index=indexSelectActivityForEdit{
+                if index.section == indexSelect {
+                    tripModel?.days[indexSelect].activaty[index.row]=ActivatyModel(title: title, subTitle: subTitleTextFiled.text ?? "", imageActivaty: ActivatyType(rawValue: typeActivatySelecte)!)
+                }else{
+                    tripModel?.days[index.section].activaty.remove(at: index.row)
+                    addNewActivaty(title)
+                }
+            }else{
+                addNewActivaty(title)
+                
+            }
             if let updateTripModel = updateTripModel { updateTripModel() }
         }
         self.dismiss(animated: true, completion: nil)
@@ -92,4 +125,5 @@ extension AddActivatyViewController:UITextFieldDelegate {
         
         return true
     }
+    
 }

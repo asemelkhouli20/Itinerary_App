@@ -8,17 +8,34 @@
 import UIKit
 
 class ActivatyTableViewController: UITableViewController {
-
+    
     var tripModel : TripModel?
     var addAction:UIAlertAction?
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     var updateTripsModel:(()->())?
+    var indexSelectActivatyForEdit:IndexPath?
     
+    @objc func addAnnotation(press:UILongPressGestureRecognizer) {
+        tableView.isEditing=true
+        doneButton.title="done"
+        addButton.isEnabled=false
+    }
+    @IBAction func donePressed(_ sender: UIBarButtonItem) {
+        tableView.isEditing=false
+        doneButton.title=nil
+        addButton.isEnabled=true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem?.tintColor=Help.tintColor
         navigationItem.title=tripModel?.name
-
+        
+        let pressHolder = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(press:)))
+        pressHolder.minimumPressDuration=1.0
+        tableView.addGestureRecognizer(pressHolder)
+        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -28,6 +45,7 @@ class ActivatyTableViewController: UITableViewController {
     }
     
     @IBAction func addPressed(_ sender: UIBarButtonItem) {
+        
         let alertAdd = UIAlertController(title: "New Item", message: "What would you like to add?", preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let dayAction = UIAlertAction(title: "Day", style: .default,handler: handelDayAction(action:))
@@ -61,9 +79,10 @@ class ActivatyTableViewController: UITableViewController {
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         //add day
-         addAction = UIAlertAction(title: "Add", style: .default) { action in
-             self.tripModel?.days.append(DayModel(title: title.text!, subTitle: subTitle.text!, activaty: []))
-             self.tableView.reloadData()
+        addAction = UIAlertAction(title: "Add", style: .default) { action in
+            self.tripModel?.days.append(DayModel(title: title.text!, subTitle: subTitle.text!, activaty: []))
+            let indexSet = IndexSet(integer: self.tripModel!.days.count-1)
+            self.tableView.insertSections(indexSet, with: .left)
         }
         alert.addAction(cancelAction)
         alert.addAction(addAction!)
@@ -80,16 +99,26 @@ class ActivatyTableViewController: UITableViewController {
         if segue.identifier == Help.AddActivatyVC {
             let popup = segue.destination as! AddActivatyViewController
             popup.tripModel=tripModel
-            popup.updateTripModel = {
-                self.tripModel=popup.tripModel
-                self.tableView.reloadData()
+            if indexSelectActivatyForEdit != nil {
+                popup.indexSelectActivityForEdit=indexSelectActivatyForEdit
+                popup.updateTripModel = {
+                    self.tripModel=popup.tripModel
+                    self.tableView.reloadData()
+                    self.indexSelectActivatyForEdit=nil
+                }
+            }else {
+                popup.updateTripModel = {
+                    self.tripModel=popup.tripModel
+                    let indexPath = [IndexPath(row: self.tripModel!.days[popup.indexSelect].activaty.count-1, section: popup.indexSelect)]
+                    self.tableView.insertRows(at: indexPath, with: .left)
+                }
             }
         }
     }
     
-
+    
     // MARK: - Table view data source
-
+    
     //sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -104,7 +133,7 @@ class ActivatyTableViewController: UITableViewController {
         return 44
     }
     
-
+    
     //row
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -118,8 +147,51 @@ class ActivatyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-
+    //MARK: - Swipe Actions delete
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "delete") { (action, view,performAction: @escaping (Bool) -> Void) in
+            let activaty = self.tripModel?.days[indexPath.section].activaty[indexPath.row]
+            
+            let alert = UIAlertController(title: "Delete Activaty", message: "are you sure you want delete \(activaty!.title)", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
+                self.tripModel?.days[indexPath.section].activaty.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                performAction(true)
+            }
+            let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: {_ in performAction(false)})
+            alert.addAction(cancelAction)
+            alert.addAction(deleteAction)
+            alert.view.tintColor=Help.tintColor
+            self.present(alert, animated: true, completion: nil)
+        }
+        delete.image=UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = UIContextualAction(style: .normal, title: "edit") { (action, view,performAction: @escaping (Bool) -> Void) in
+            self.indexSelectActivatyForEdit = indexPath
+            self.performSegue(withIdentifier: Help.AddActivatyVC, sender: self)
+        }
+        edit.backgroundColor=UIColor.systemBlue
+        edit.image=UIImage(systemName: "pencil")
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
+    //MARK: - table move
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let activaty = (tripModel?.days[sourceIndexPath.section].activaty[sourceIndexPath.row])!
+        tripModel?.days[sourceIndexPath.section].activaty.remove(at: sourceIndexPath.row)
+        tripModel?.days[destinationIndexPath.section].activaty.insert(activaty, at: destinationIndexPath.row)
+    }
+    
+    
 }
+
 //MARK: - UITextFiledDelgate
 extension ActivatyTableViewController:UITextFieldDelegate {
     

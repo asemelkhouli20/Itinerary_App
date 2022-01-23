@@ -13,6 +13,7 @@
 		C244B9C72794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */; };
 		C244B9CA2794FD5A008B8D8C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C92794FD5A008B8D8C /* Colors.xcassets */; };
 		C244B9D027952722008B8D8C /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9CF27952722008B8D8C /* AddTripViewController.swift */; };
+		C25EED46279CABF2002ED00D /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C25EED45279CABF2002ED00D /* IQKeyboardManagerSwift */; };
 		C29EDDA627935770007159FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA527935770007159FB /* AppDelegate.swift */; };
 		C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA727935770007159FB /* SceneDelegate.swift */; };
 		C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29EDDA927935770007159FB /* TripsViewController.swift */; };
@@ -63,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C25EED46279CABF2002ED00D /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +189,9 @@
 			dependencies = (
 			);
 			name = Itinerary;
+			packageProductDependencies = (
+				C25EED45279CABF2002ED00D /* IQKeyboardManagerSwift */,
+			);
 			productName = Itinerary;
 			productReference = C29EDDA227935770007159FB /* Itinerary.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +220,9 @@
 				Base,
 			);
 			mainGroup = C29EDD9927935770007159FB;
+			packageReferences = (
+				C25EED44279CABF2002ED00D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = C29EDDA327935770007159FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -488,6 +496,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C25EED44279CABF2002ED00D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C25EED45279CABF2002ED00D /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C25EED44279CABF2002ED00D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C29EDDAE27935770007159FB /* Itinerary.xcdatamodeld */ = {
