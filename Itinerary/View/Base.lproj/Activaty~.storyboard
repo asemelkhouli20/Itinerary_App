@@ -93,18 +93,52 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="kWu-su-rRf">
                             <color key="tintColor" name="tint"/>
                             <connections>
-                                <segue destination="xgM-fm-ef3" kind="presentation" identifier="AddTripViewController" id="Dmk-HB-MPm"/>
+                                <action selector="addTrip:" destination="BYZ-38-t0r" id="XIh-Yj-qsl"/>
+                                <segue destination="xgM-fm-ef3" kind="presentation" identifier="toAddTrip" id="Dmk-HB-MPm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Voe-0d-Sqg" id="bO3-9I-rzB"/>
-                        <segue destination="KHd-rm-wM7" kind="show" identifier="ActivatyTableViewController" id="1DU-xQ-dt7"/>
+                        <segue destination="lMH-6O-AYG" kind="show" identifier="activaty" id="1DU-xQ-dt7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="902.89855072463774" y="118.52678571428571"/>
+        </scene>
+        <!--Activaty Table View Controller-->
+        <scene sceneID="VLI-Pv-1RB">
+            <objects>
+                <tableViewController id="lMH-6O-AYG" customClass="ActivatyTableViewController" customModule="Itinerary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="4QD-v1-Ftd">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8Da-Qm-IcQ" customClass="ActivatyTableViewCell" customModule="Itinerary" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Da-Qm-IcQ" id="t3a-Iy-VSl">
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lMH-6O-AYG" id="xwV-Vo-CEI"/>
+                            <outlet property="delegate" destination="lMH-6O-AYG" id="vgy-oc-yxV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="0lA-r9-6R4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="85N-T3-P2Z">
+                            <color key="tintColor" name="tint"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DQz-hF-Hot" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1785" y="124"/>
         </scene>
         <!--Add Trip View Controller-->
         <scene sceneID="lsN-Fr-qyH">
@@ -115,16 +149,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="title trip" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-ba-TBV">
-                                <rect key="frame" x="20" y="75.666666666666671" width="350" height="34"/>
+                                <rect key="frame" x="20" y="70.666666666666671" width="350" height="34"/>
                                 <color key="tintColor" name="tint"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="jT9-Me-nLT">
-                                <rect key="frame" x="20" y="19.999999999999996" width="350" height="35.666666666666657"/>
+                                <rect key="frame" x="5" y="14.999999999999996" width="380" height="35.666666666666657"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53a-G6-vWQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="115.33333333333333" height="35.666666666666664"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53a-G6-vWQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="125.33333333333333" height="35.666666666666664"/>
                                         <color key="tintColor" name="tint"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Cancel">
@@ -135,13 +169,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsD-1Q-OS4">
-                                        <rect key="frame" x="117.33333333333334" y="0.0" width="115.33333333333334" height="35.666666666666664"/>
+                                        <rect key="frame" x="127.33333333333334" y="0.0" width="125.33333333333334" height="35.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7i-Ay-Itu">
-                                        <rect key="frame" x="234.66666666666666" y="0.0" width="115.33333333333334" height="35.666666666666664"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7i-Ay-Itu">
+                                        <rect key="frame" x="254.66666666666671" y="0.0" width="125.33333333333334" height="35.666666666666664"/>
                                         <color key="tintColor" name="tint"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Add">
@@ -154,7 +188,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i3P-uc-7cF">
-                                <rect key="frame" x="10" y="149.66666666666666" width="370" height="119.99999999999997"/>
+                                <rect key="frame" x="10" y="144.66666666666666" width="370" height="119.99999999999997"/>
                                 <color key="backgroundColor" name="fled"/>
                                 <color key="tintColor" name="tint"/>
                                 <constraints>
@@ -162,7 +196,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pL-F1-CWl">
-                                <rect key="frame" x="10" y="149.66666666666666" width="370" height="119.99999999999997"/>
+                                <rect key="frame" x="10" y="144.66666666666666" width="370" height="119.99999999999997"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="IB1-EJ-2WC"/>
                                 </constraints>
@@ -171,7 +205,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgH-Gi-hSe">
-                                <rect key="frame" x="10" y="149.66666666666666" width="370" height="119.99999999999997"/>
+                                <rect key="frame" x="10" y="144.66666666666666" width="370" height="119.99999999999997"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="fg0-BE-2q4"/>
                                 </constraints>
@@ -193,11 +227,11 @@
                             <constraint firstItem="IgH-Gi-hSe" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="F6Q-6f-no0"/>
                             <constraint firstItem="i3P-uc-7cF" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="FkI-zM-uwp"/>
                             <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="IgH-Gi-hSe" secondAttribute="trailing" constant="10" id="Hxi-Ac-Agy"/>
-                            <constraint firstItem="jT9-Me-nLT" firstAttribute="leading" secondItem="iJ5-67-cQw" secondAttribute="leading" constant="20" id="Jr3-5U-ma8"/>
+                            <constraint firstItem="jT9-Me-nLT" firstAttribute="leading" secondItem="iJ5-67-cQw" secondAttribute="leading" constant="5" id="Jr3-5U-ma8"/>
                             <constraint firstItem="5pL-F1-CWl" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="Kjh-Ui-oqP"/>
-                            <constraint firstAttribute="trailing" secondItem="jT9-Me-nLT" secondAttribute="trailing" constant="20" id="Q1d-K8-1of"/>
+                            <constraint firstAttribute="trailing" secondItem="jT9-Me-nLT" secondAttribute="trailing" constant="5" id="Q1d-K8-1of"/>
                             <constraint firstItem="fQI-ba-TBV" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="20" id="U29-qu-K5V"/>
-                            <constraint firstItem="jT9-Me-nLT" firstAttribute="top" secondItem="iJ5-67-cQw" secondAttribute="top" constant="20" id="YDv-Jz-DfK"/>
+                            <constraint firstItem="jT9-Me-nLT" firstAttribute="top" secondItem="iJ5-67-cQw" secondAttribute="top" constant="15" id="YDv-Jz-DfK"/>
                             <constraint firstItem="IgH-Gi-hSe" firstAttribute="leading" secondItem="1sj-rf-agf" secondAttribute="leading" constant="10" id="Z7I-cq-Qsz"/>
                             <constraint firstItem="5pL-F1-CWl" firstAttribute="top" secondItem="fQI-ba-TBV" secondAttribute="bottom" constant="40" id="aAl-6v-CiY"/>
                             <constraint firstItem="1sj-rf-agf" firstAttribute="trailing" secondItem="5pL-F1-CWl" secondAttribute="trailing" constant="10" id="bCh-gu-ZSS"/>
@@ -240,16 +274,6 @@
             </objects>
             <point key="canvasLocation" x="53.623188405797109" y="124.55357142857142"/>
         </scene>
-        <!--Activaty-->
-        <scene sceneID="jV6-WR-R0o">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Activaty" id="KHd-rm-wM7" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="f8d-d5-g9f"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TPy-DP-4eM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1785" y="124"/>
-        </scene>
     </scenes>
     <color key="tintColor" name="tint"/>
     <resources>
@@ -261,7 +285,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="fled">
-            <color red="0.99000000953674316" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <namedColor name="tint">
             <color red="0.92199999094009399" green="0.30199998617172241" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
