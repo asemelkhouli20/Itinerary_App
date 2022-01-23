@@ -23,7 +23,7 @@ class ActivatyTableViewCell: UITableViewCell {
         additionImage.layer.borderColor = Help.boredColor?.cgColor
         additionImage.layer.cornerRadius = additionImage.frame.height/2
         additionImage.clipsToBounds = true
-        
+//TODO: - change to defualt
         additionImage.image=UIImage(named: "image")
         coverView.layer.cornerRadius=20
     }

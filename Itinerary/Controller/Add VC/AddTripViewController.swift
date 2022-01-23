@@ -15,39 +15,36 @@ class AddTripViewController : UIViewController {
     @IBOutlet weak var tripName: UILabel!
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var textFiled: UITextField!
-    
     @IBOutlet weak var navgationTitle: UILabel!
     @IBOutlet weak var doneButtone: UIButton!
-    var newTrip : TripModel!
+    
+    //edit
     var tripForEdit:TripModel?
+    //to save image from picker view or take it from tripVC if edit mode on
     var tripImage:UIImage?
+    //pass back data to tripVC
+    var newTrip : TripModel!
     var passData : (()->())?
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textFiled.delegate=self
         coverImage.layer.cornerRadius=20
-        //edit mode on
+        //check if edit mode on
         if let trip = tripForEdit {
             textFiled.text=trip.name
             coverImage.image=trip.tripImage
             updateCover()
             navgationTitle.text="Edit Trip"
             doneButtone.setTitle("Save", for: .normal)
-            
         }
     }
-    
     @IBAction func cancelPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-    
     @IBAction func addImage(_ sender: UIButton) {
         askTheUserToChooseTheSource()
     }
-    
     @IBAction func addPressed(_ sender: UIButton) {
         //make sure text filed not empty and change the text filrd to alert the user
         guard textFiled.text != "", let newTripTitle = textFiled.text else {  textFilrdIsEmpty(); return }
@@ -102,6 +99,7 @@ class AddTripViewController : UIViewController {
         textFiled.layer.cornerRadius=5
         textFiled.placeholder="title trip required"
     }
+    
     //present to user sheet and make the user to choose between the resource Camera/Photo Library
     func askTheUserToChooseTheSource() {
         //add image; open image picker to select or take photo from camera
@@ -180,6 +178,7 @@ extension AddTripViewController : UIImagePickerControllerDelegate,UINavigationCo
     }
     
 }
+
 //MARK: - UITextFieldDelegate
 extension AddTripViewController : UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {

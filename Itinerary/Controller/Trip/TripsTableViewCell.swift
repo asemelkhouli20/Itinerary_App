@@ -10,7 +10,6 @@ import UIKit
 class TripsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
-    
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
     
@@ -18,11 +17,10 @@ class TripsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         cellView.layer.cornerRadius = 20
-        
         title.layer.cornerRadius=20
         title.textColor=UIColor.white
-        
     }
+    
     func setupCell(trip:TripModel){
         title.text = trip.name
         if let image = trip.tripImage {
