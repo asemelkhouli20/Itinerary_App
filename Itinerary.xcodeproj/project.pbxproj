@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C209207E279E878F0054D330 /* ActivityModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2092078279E878F0054D330 /* ActivityModel+CoreDataClass.swift */; };
+		C209207F279E878F0054D330 /* ActivityModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2092079279E878F0054D330 /* ActivityModel+CoreDataProperties.swift */; };
+		C2092082279E878F0054D330 /* TripModels+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C209207C279E878F0054D330 /* TripModels+CoreDataClass.swift */; };
+		C2092083279E878F0054D330 /* TripModels+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C209207D279E878F0054D330 /* TripModels+CoreDataProperties.swift */; };
+		C2092086279E88E40054D330 /* DayModels+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2092084279E88E40054D330 /* DayModels+CoreDataClass.swift */; };
+		C2092087279E88E40054D330 /* DayModels+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2092085279E88E40054D330 /* DayModels+CoreDataProperties.swift */; };
 		C22FD1BC279BE9250055F3DB /* AddActivatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */; };
 		C244B9C32794DFC9008B8D8C /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C22794DFC9008B8D8C /* TripModel.swift */; };
 		C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */; };
@@ -33,6 +39,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C2092078279E878F0054D330 /* ActivityModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C2092079279E878F0054D330 /* ActivityModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C209207C279E878F0054D330 /* TripModels+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripModels+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C209207D279E878F0054D330 /* TripModels+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripModels+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C2092084279E88E40054D330 /* DayModels+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayModels+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C2092085279E88E40054D330 /* DayModels+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayModels+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivatyViewController.swift; sourceTree = "<group>"; };
 		C244B9C22794DFC9008B8D8C /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
 		C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
@@ -93,6 +105,7 @@
 		C244B9C12794DE2F008B8D8C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C28A6A2E279E49D800F6FEE6 /* CoreDataFile */,
 				C244B9C22794DFC9008B8D8C /* TripModel.swift */,
 				C2B417A5279A3E4A004C7F00 /* DayModel.swift */,
 				C2B417A7279A3E5A004C7F00 /* ActivatyModel.swift */,
@@ -107,6 +120,19 @@
 				C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */,
 			);
 			path = Founts;
+			sourceTree = "<group>";
+		};
+		C28A6A2E279E49D800F6FEE6 /* CoreDataFile */ = {
+			isa = PBXGroup;
+			children = (
+				C2092078279E878F0054D330 /* ActivityModel+CoreDataClass.swift */,
+				C2092079279E878F0054D330 /* ActivityModel+CoreDataProperties.swift */,
+				C2092084279E88E40054D330 /* DayModels+CoreDataClass.swift */,
+				C2092085279E88E40054D330 /* DayModels+CoreDataProperties.swift */,
+				C209207C279E878F0054D330 /* TripModels+CoreDataClass.swift */,
+				C209207D279E878F0054D330 /* TripModels+CoreDataProperties.swift */,
+			);
+			path = CoreDataFile;
 			sourceTree = "<group>";
 		};
 		C29EDD9927935770007159FB = {
@@ -261,13 +287,19 @@
 				C244B9C32794DFC9008B8D8C /* TripModel.swift in Sources */,
 				C2B417B3279A53E2004C7F00 /* HeaderTableViewCell.swift in Sources */,
 				C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */,
+				C2092082279E878F0054D330 /* TripModels+CoreDataClass.swift in Sources */,
 				C29EDDB027935770007159FB /* Itinerary.xcdatamodeld in Sources */,
 				C2B417AD279A446B004C7F00 /* ActivatyTableViewCell.swift in Sources */,
+				C2092083279E878F0054D330 /* TripModels+CoreDataProperties.swift in Sources */,
 				C29EDDA627935770007159FB /* AppDelegate.swift in Sources */,
+				C209207E279E878F0054D330 /* ActivityModel+CoreDataClass.swift in Sources */,
 				C2B417A6279A3E4A004C7F00 /* DayModel.swift in Sources */,
 				C2B417B5279A6E2A004C7F00 /* ActivatyTypeEnum.swift in Sources */,
+				C2092087279E88E40054D330 /* DayModels+CoreDataProperties.swift in Sources */,
 				C2B417A8279A3E5A004C7F00 /* ActivatyModel.swift in Sources */,
+				C209207F279E878F0054D330 /* ActivityModel+CoreDataProperties.swift in Sources */,
 				C22FD1BC279BE9250055F3DB /* AddActivatyViewController.swift in Sources */,
+				C2092086279E88E40054D330 /* DayModels+CoreDataClass.swift in Sources */,
 				C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

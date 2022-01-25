@@ -6,58 +6,42 @@
 //
 
 import UIKit
+import CoreData
 
 class TripsViewController: UIViewController {
     
+   
+  
     @IBOutlet weak var tableView: UITableView!
    
     //data
-    var trips = [TripModel]()
+    var trips = [TripModels]()
     //edit mode on/off if tripForEdit is nill
-    var tripForEdit:TripModel?
     var editOnIndex:Int?
     //index select trip to pass data after modify it by activatyVC
     var indexForSelectTrip:Int?
 
+    //for test
+    var tripTest = [TripModels]()
+    //CoreData
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    func fetchTrip(){
+        do{
+           trips = try context.fetch(TripModels.fetchRequest())
+        }catch{
+            
+        }
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate=self
         tableView.dataSource=self
         
-        //
-        //marke date
-        trips.append(TripModel(id: UUID(), name: "Go to Bail", tripImage: nil, days: []))
-        trips.append(TripModel(id: UUID(), name: "new zlanda", tripImage: UIImage(named: "image"), days: []))
-        trips.append(TripModel(id: UUID(), name: "Trip to cairo", tripImage: nil, days: []))
-        trips.append(TripModel(id: UUID(), name: "Sangfora", tripImage: UIImage(named: "image"), days: []))
-        //mark data complete
-        trips.append(TripModel(id: UUID(), name: "Back From Egypt", tripImage: nil, days: [
-            DayModel(title: "Septmper 12", subTitle: "whatch", activaty: [
-                ActivatyModel(title: "basketBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "FootBall", subTitle: "play", imageActivaty: .Hotel),
-                ActivatyModel(title: "RockBall", subTitle: "play", imageActivaty: .explore),
-                ActivatyModel(title: "kaboobBall", subTitle: "play", imageActivaty: .restaurant)
-            ]),
-            DayModel(title: "Septmper 16", subTitle: "whatch", activaty: [
-                ActivatyModel(title: "basketBall", subTitle: "play", imageActivaty: .taxi),
-                ActivatyModel(title: "FootBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "RockBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "kaboobBall", subTitle: "play", imageActivaty: .fly)
-            ]),
-            DayModel(title: "Septmper 20", subTitle: "whatch", activaty: [
-                ActivatyModel(title: "basketBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "FootBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "RockBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "kaboobBall", subTitle: "play", imageActivaty: .fly)
-            ]),
-            DayModel(title: "Septmper 30", subTitle: "whatch", activaty: [
-                ActivatyModel(title: "basketBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "FootBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "RockBall", subTitle: "play", imageActivaty: .fly),
-                ActivatyModel(title: "kaboobBall", subTitle: "play", imageActivaty: .fly)
-            ])
-        ]))
+        fetchTrip()
     }
     
     //MARK: - Prepare for segue addTripVC/activatyVC
@@ -65,35 +49,25 @@ class TripsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Help.AddTripVC {
             let popup = segue.destination as! AddTripViewController
-            //pass tripForEdit or nil if it new trip
-            popup.tripForEdit=tripForEdit
            //check if edit mode on - Edit mood from Swipe Cell Check MARK -> Swipe Actions delete/edit
             if let index = editOnIndex {
-                //edit trip
-                popup.passData = { [weak self] in
-                    self?.trips[index]=popup.newTrip
-                    self?.tableView.reloadData()
-                } //end passData
-            } else {
-                //new trip
-                popup.passData = { [weak self] in
-                    self?.trips.append(popup.newTrip!)
-                    self?.tableView.reloadData()
-                } //end passData
+                popup.tripModel=self.trips[index]
+            }
+            popup.update = {
+                self.fetchTrip()
+                self.tableView.reloadData()
             }
             //make edit mode off
-            tripForEdit=nil
             editOnIndex=nil
-            
-        }else if segue.identifier == Help.ActivatyTableVC{
+        }
+        
+        else if segue.identifier == Help.ActivatyTableVC{
             let activatyVC = segue.destination as? ActivatyTableViewController
-            activatyVC?.tripModel=trips[indexForSelectTrip!]
-            //after dismass the activatyVC update trip model
-            activatyVC?.updateTripsModel = {[weak self] in
-                //replace tripModel with trip after modify by activatyVC
-                self?.trips[(self!.indexForSelectTrip!)]=activatyVC!.tripModel!
+            if let index = indexForSelectTrip {
+                activatyVC?.tripModel=self.trips[index]
             }
         }
+       
     }
     
     
@@ -104,11 +78,21 @@ class TripsViewController: UIViewController {
         
         let delete = UIContextualAction(style: .destructive, title: "delete") { (contextualAction, view , actionPerformanc: @escaping (Bool) -> Void) in
             //make alert to make sure is delete it
-            let alert = UIAlertController(title: "Delete trip", message: "Are you sure you want to delete this trip : \(self.trips[indexPath.row].name)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Delete trip", message: "Are you sure you want to delete this trip : \( self.trips[indexPath.row].name!)", preferredStyle: .alert)
             //delete the elment
             let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
+                //delete from core Data
+                self.context.delete(self.trips[indexPath.row])
+                //delete from view
                 self.trips.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
+                //save
+                do{
+                try self.context.save()
+                }catch{
+                    print(error)
+                }
+                
                 actionPerformanc(true)
             }
             
@@ -127,14 +111,11 @@ class TripsViewController: UIViewController {
     //edit
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let edit = UIContextualAction(style: .normal, title: "edit") { (contextualAction, view,performAction: @escaping (Bool) -> Void) in
-            
-            //give tripForEdit a value so it have now value not nil so edit mode on check MARK -> Prepare for segue addTripVC/activatyVC
-            self.editOnIndex=indexPath.row //save the index too
-            self.tripForEdit=self.trips[self.editOnIndex!]
+            //give editOnIndex a value so it have now value not nil so edit mode on check MARK -> Prepare for segue addTripVC/activatyVC
+            self.editOnIndex=indexPath.row
             //go to addTripVC on edit mode on
             self.performSegue(withIdentifier: Help.AddTripVC, sender: nil)
         }
-        
         edit.image=UIImage(systemName: "pencil")
         edit.backgroundColor=UIColor.systemBlue
         

@@ -6,11 +6,11 @@
 //
 
 import Foundation
-
-struct ActivatyModel {
-    var title:String
-    var subTitle:String
-    var imageActivaty:ActivatyType
-}
-
-
+//
+//struct ActivatyModel {
+//    var title:String
+//    var subTitle:String
+//    var imageActivaty:ActivatyType
+//}
+//
+//

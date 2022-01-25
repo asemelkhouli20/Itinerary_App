@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ActivityModel" representedClassName="ActivityModel" syncable="YES">
+        <attribute name="activatyID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="activityTag" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subTitle" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="typeActivity" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" customClassName="ActavatyType"/>
+        <relationship name="childDayModel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayModels" inverseName="activityModel" inverseEntity="DayModels"/>
+    </entity>
+    <entity name="DayModels" representedClassName="DayModels" syncable="YES">
+        <attribute name="dayID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="subTitle" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="activityModel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActivityModel" inverseName="childDayModel" inverseEntity="ActivityModel"/>
+        <relationship name="childTripModel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripModels" inverseName="dayModels" inverseEntity="TripModels"/>
+    </entity>
+    <entity name="TripModels" representedClassName="TripModels" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="tripID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="tripImage" optional="YES" attributeType="Transformable" customClassName="UIImage"/>
+        <relationship name="dayModels" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DayModels" inverseName="childTripModel" inverseEntity="DayModels"/>
+    </entity>
+    <elements>
+        <element name="ActivityModel" positionX="-36" positionY="27" width="128" height="119"/>
+        <element name="DayModels" positionX="-54" positionY="9" width="128" height="104"/>
+        <element name="TripModels" positionX="-63" positionY="-18" width="128" height="89"/>
+    </elements>
 </model>

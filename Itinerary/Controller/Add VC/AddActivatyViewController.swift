@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import CoreData
 class AddActivatyViewController: UIViewController {
     
     
@@ -19,7 +19,7 @@ class AddActivatyViewController: UIViewController {
     @IBOutlet var typeActivaty: [UIButton]!
     
     
-    var tripModel:TripModel?
+    var tripModel:TripModels?
     //to Type Activaty by defualt = .fly
     var typeActivatySelecte=0
     //for select from picker day(section) by defualt first item
@@ -30,6 +30,44 @@ class AddActivatyViewController: UIViewController {
     //Edit mode
     var indexSelectActivityForEdit:IndexPath?
     
+    
+    //coreData
+    var dayModel:[DayModels]?
+    var activatyModel:[ActivityModel]?
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    func fetchDayModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil){
+        let dayPericate = NSPredicate(format: "childTripModel.tripID MATCHES %@",tripModel!.tripID! as CVarArg)
+        if let addtionalPericate = pericate {
+            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,dayPericate])
+        }
+        else {
+            request.predicate=dayPericate
+        }
+        do{
+            dayModel = try context.fetch(DayModels.fetchRequest())
+        }catch{print(error)
+            
+        }
+    }
+    
+    
+    func fetchActavatyModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
+        let activatyPericate = NSPredicate(format: "childDayModel.dayID MATCHES %@",dayModel![selectDay].dayID! as CVarArg)
+        if let addtionalPericate = pericate {
+            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,activatyPericate])
+        }
+        else {
+            request.predicate=activatyPericate
+        }
+        request.sortDescriptors = [NSSortDescriptor(key: "activityTag", ascending: true)]
+        do{
+            activatyModel = try context.fetch(ActivityModel.fetchRequest())
+        }catch{print(error)
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerView.dataSource=self
@@ -39,19 +77,20 @@ class AddActivatyViewController: UIViewController {
         
         //to make sure title not empty check MARK -> UITextFiledDelgate
         addButton.isEnabled=false
-        
+        fetchDayModel()
         //editMode
         if let index = indexSelectActivityForEdit {
             //make addButton Enabled
             addButton.isEnabled=true
             addButton.setTitle("Save", for: .normal)
             //set data to View
-            let activaaty=tripModel?.days[index.section].activaty[index.row]
-            titleTextFiled.text=activaaty?.title
-            subTitleTextFiled.text=activaaty?.subTitle
+            fetchActavatyModel(selectDay: index.section)
+            let actavity = activatyModel?[index.row]
+            titleTextFiled.text=actavity?.title
+            subTitleTextFiled.text=actavity?.subTitle
             //make activaty Type selected on view
             typeActivaty.forEach({$0.tintColor=UIColor.systemGray})
-            let selectButton = activaaty?.imageActivaty.rawValue
+            let selectButton = Int(actavity!.activityTag)
             typeActivaty.forEach({if $0.tag == selectButton{$0.tintColor=Help.tintColor;typeActivatySelecte=$0.tag}})
             //pass day and make it select it on view
             indexSelect=index.section
@@ -61,7 +100,20 @@ class AddActivatyViewController: UIViewController {
     }
     
      func addNewActivaty(_ title: String) {
-        tripModel?.days[indexSelect].activaty.append(ActivatyModel(title: title, subTitle: subTitleTextFiled.text ?? "", imageActivaty: ActivatyType(rawValue: typeActivatySelecte)!))
+         fetchActavatyModel(selectDay: indexSelect)
+         let newActivityadd = ActivityModel(context: context)
+         newActivityadd.activityTag=Int64(activatyModel!.count)
+         newActivityadd.title=title
+         newActivityadd.activatyID=UUID()
+         newActivityadd.subTitle=subTitleTextFiled.text ?? ""
+         newActivityadd.typeActivity=Int16(typeActivatySelecte)
+         
+         dayModel![indexSelect].addToActivityModel(newActivityadd)
+         do{
+         try self.context.save()
+         }catch{
+             print(error)
+         }
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
@@ -71,10 +123,16 @@ class AddActivatyViewController: UIViewController {
             if let index=indexSelectActivityForEdit{
                 if index.section == indexSelect { //in the same day(section)
                     //just update
-                    tripModel?.days[indexSelect].activaty[index.row] = ActivatyModel(title: title, subTitle: subTitleTextFiled.text ?? "", imageActivaty: ActivatyType(rawValue: typeActivatySelecte)!)
+                    fetchActavatyModel(selectDay: indexSelect)
+                    activatyModel![index.row].title = title
+                    activatyModel![index.row].subTitle = subTitleTextFiled.text ?? ""
+                    activatyModel![index.row].typeActivity = Int16(typeActivatySelecte)
+                    try! context.save()
                 }else{//in another day(section)
+                    fetchActavatyModel(selectDay: indexSelect)
                     //delete the activity from old place
-                    tripModel?.days[index.section].activaty.remove(at: index.row)
+                    dayModel![index.section].removeFromActivityModel(activatyModel![index.row])
+                    try! self.context.save()
                     //and make on in new place on day[selectNew]
                     addNewActivaty(title)
                 }
@@ -109,10 +167,10 @@ extension AddActivatyViewController: UIPickerViewDataSource,UIPickerViewDelegate
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return tripModel?.days.count ?? 0
+        return dayModel?.count ?? 0
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return tripModel?.days[row].title
+        return dayModel![row].title
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

@@ -6,9 +6,9 @@
 //
 
 import Foundation
-
-struct DayModel {
-    var title:String
-    var subTitle:String
-    var activaty : [ActivatyModel]
-}
+//
+//struct DayModel {
+//    var title:String
+//    var subTitle:String
+//    var activaty : [ActivatyModel]
+//}

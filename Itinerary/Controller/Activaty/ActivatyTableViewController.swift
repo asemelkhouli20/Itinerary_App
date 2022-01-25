@@ -6,25 +6,61 @@
 //
 
 import UIKit
-
+import CoreData
 class ActivatyTableViewController: UITableViewController {
-    
     
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var tripModel : TripModel?
+    var tripModel : TripModels?
     //Edit mode to addActavatyVC
     var indexSelectActivatyForEdit:IndexPath?
-    //pass back the data to tripVC
-    var updateTripsModel:(()->())?
     //add action for day model on alert add new day make this button isEnabled=false until the user write at lest one character on textFiled for title on alert
     var addAction:UIAlertAction?
+    //coreData
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //handel mode edit table view by using hold touch the table view and end it with press on done that will hidden when edit table view mode off
     @objc func addAnnotation(press:UILongPressGestureRecognizer) {
         tableView.isEditing=true
         doneButton.title="done"
         addButton.isEnabled=false
+        fetchDayModel()
+    }
+    
+    //coreData
+    var dayModel:[DayModels]?
+    var activatyModel:[ActivityModel]?
+    
+    func fetchDayModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil){
+        let dayPericate = NSPredicate(format: "childTripModel.tripID MATCHES %@",tripModel!.tripID! as CVarArg)
+        if let addtionalPericate = pericate {
+            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,dayPericate])
+        }
+        else {
+            request.predicate=dayPericate
+        }
+        do{
+            dayModel = try context.fetch(DayModels.fetchRequest())
+        }catch{print(error)
+            
+        }
+    }
+    
+    
+    func fetchActavatyModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
+        let activatyPericate = NSPredicate(format: "childDayModel.dayID MATCHES %@",dayModel![selectDay].dayID! as CVarArg)
+        if let addtionalPericate = pericate {
+            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,activatyPericate])
+        }
+        else {
+            request.predicate=activatyPericate
+        }
+        request.sortDescriptors = [NSSortDescriptor(key: "activityTag", ascending: true)]
+        do{
+            activatyModel = try context.fetch(ActivityModel.fetchRequest())
+        }catch{print(error)
+            
+        }
     }
     
     override func viewDidLoad() {
@@ -35,14 +71,7 @@ class ActivatyTableViewController: UITableViewController {
         let pressHolder = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(press:)))
         pressHolder.minimumPressDuration=1.0
         tableView.addGestureRecognizer(pressHolder)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //pass back data when user will out this view
-        if let updateTripsModel = updateTripsModel {
-            updateTripsModel()
-        }
+        fetchDayModel()
     }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
@@ -67,7 +96,9 @@ class ActivatyTableViewController: UITableViewController {
         //for ipad
         alertAdd.popoverPresentationController?.barButtonItem = sender
         //you can't add activaty without day
-        activatyAction.isEnabled=tripModel!.days.count > 0
+        //TODO: - here
+        
+        activatyAction.isEnabled = self.tripModel?.dayModels?.count ?? 0 > 0
         
         present(alertAdd, animated: true, completion: nil)
     }
@@ -95,9 +126,18 @@ class ActivatyTableViewController: UITableViewController {
         
         //add day
         addAction = UIAlertAction(title: "Add", style: .default) { action in
-            self.tripModel?.days.append(DayModel(title: title.text!, subTitle: subTitle.text!, activaty: []))
+            let newDay = DayModels(context: self.context)
+            newDay.title=title.text!
+            newDay.subTitle=subTitle.text!
+            newDay.dayID=UUID()
+            self.tripModel?.addToDayModels(newDay)
+            do {
+            try self.context.save()
+            }catch{
+                print(error)
+            }
             //animated
-            let indexSet = IndexSet(integer: self.tripModel!.days.count-1)
+            let indexSet = IndexSet(integer: self.tripModel!.dayModels!.count-1)
             self.tableView.insertSections(indexSet, with: .left)
         }
         alert.addAction(cancelAction)
@@ -133,7 +173,7 @@ class ActivatyTableViewController: UITableViewController {
             popup.updateTripModel = { //new Activaty
                 self.tripModel=popup.tripModel
                 //animated
-                let indexPath = [IndexPath(row: self.tripModel!.days[popup.indexSelect].activaty.count-1, section: popup.indexSelect)]
+                let indexPath = [IndexPath(row: self.dayModel!.count-1, section: popup.indexSelect)]
                 self.tableView.insertRows(at: indexPath, with: .left)
             }
         }
@@ -146,11 +186,12 @@ class ActivatyTableViewController: UITableViewController {
     //sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return tripModel?.days.count ?? 0
+        fetchDayModel()
+        return tripModel?.dayModels?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: Help.headerCell) as! HeaderTableViewCell
-        cell.setup(dayModel: (tripModel?.days[section])!)
+        cell.setup(dayModel: (dayModel![section]) )
         return cell.contentView
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -160,11 +201,13 @@ class ActivatyTableViewController: UITableViewController {
     //row
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tripModel?.days[section].activaty.count ?? 0
+        print(section)
+        fetchActavatyModel(selectDay: section)
+        return activatyModel?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Help.activatyCell) as! ActivatyTableViewCell
-        cell.setup(activatyModel: (tripModel!.days[indexPath.section].activaty[indexPath.row]))
+        cell.setup(activatyModel: activatyModel![indexPath.row])
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -175,13 +218,17 @@ class ActivatyTableViewController: UITableViewController {
     //delete
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "delete") { (action, view,performAction: @escaping (Bool) -> Void) in
-            let activaty = self.tripModel?.days[indexPath.section].activaty[indexPath.row]
             //make alert to confirm delete from user
-            let alert = UIAlertController(title: "Delete Activaty", message: "are you sure you want delete \(activaty!.title)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Delete Activaty", message: "are you sure you want delete \(self.activatyModel![indexPath.row].title!)", preferredStyle: .alert)
+            self.fetchActavatyModel(selectDay: indexPath.section)
             //delete Action
             let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
-                self.tripModel?.days[indexPath.section].activaty.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.dayModel![indexPath.section].removeFromActivityModel(self.activatyModel![indexPath.row])
+                
+                self.activatyModel?.remove(at: indexPath.row)
+                try! self.context.save()
+                self.tableView.reloadData()
+                //self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 performAction(true)
             }
             
@@ -219,9 +266,43 @@ class ActivatyTableViewController: UITableViewController {
         return true
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let activaty = (tripModel?.days[sourceIndexPath.section].activaty[sourceIndexPath.row])!
-        tripModel?.days[sourceIndexPath.section].activaty.remove(at: sourceIndexPath.row)
-        tripModel?.days[destinationIndexPath.section].activaty.insert(activaty, at: destinationIndexPath.row)
+        fetchActavatyModel(selectDay: sourceIndexPath.section)
+        
+        if sourceIndexPath.section == destinationIndexPath.row {
+            let oldTag = sourceIndexPath.row
+            let newTag = destinationIndexPath.row
+            
+            if oldTag > newTag{
+                self.activatyModel![oldTag].activityTag=Int64(newTag)
+                for item in newTag ..< oldTag {
+                    self.activatyModel![item].activityTag+=1
+                }
+            }else if oldTag < newTag{
+                self.activatyModel![oldTag].activityTag=Int64(newTag)
+                for item in oldTag+1 ... newTag {
+                    self.activatyModel![item].activityTag-=1
+                }
+            }
+        }else{
+            let actavity = self.activatyModel![sourceIndexPath.row]
+            self.context.delete(self.activatyModel![sourceIndexPath.row])
+            self.fetchActavatyModel(selectDay: destinationIndexPath.section)
+            
+            actavity.activityTag=Int64(destinationIndexPath.row)
+            
+            for item in destinationIndexPath.row ..< self.activatyModel!.count {
+                self.activatyModel![item].activityTag+=1
+            }
+            self.dayModel![destinationIndexPath.section].addToActivityModel(actavity)
+            
+            
+        }
+        
+        do{
+        try self.context.save()
+        }catch{
+            print(error)
+        }
     }
     
     

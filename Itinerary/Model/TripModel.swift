@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-struct TripModel {
-    let id : UUID
-    var name:String
-    var tripImage:UIImage?
-    var days:[DayModel]
-}
+//struct TripModel {
+//    let id : UUID
+//    var name:String
+//    var tripImage:UIImage?
+//    var days:[DayModel]
+//}
 //MochiyPopPOne-Regular

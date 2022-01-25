@@ -28,8 +28,8 @@ class ActivatyTableViewCell: UITableViewCell {
         coverView.layer.cornerRadius=20
     }
 
-    func setup(activatyModel:ActivatyModel){
-        typeImage.image=UIImage(named: Help.typeActivatyImage(type: activatyModel.imageActivaty))
+    func setup(activatyModel:ActivityModel){
+        typeImage.image=UIImage(named: Help.typeActivatyImage(type: ActivatyType(rawValue: Int(activatyModel.typeActivity))!))
         titleLable.text = activatyModel.title
         subTitleLable.text = activatyModel.subTitle
     }

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Photos
+import CoreData
 
 class AddTripViewController : UIViewController {
     
@@ -19,19 +20,23 @@ class AddTripViewController : UIViewController {
     @IBOutlet weak var doneButtone: UIButton!
     
     //edit
-    var tripForEdit:TripModel?
+    var editOn=false
     //to save image from picker view or take it from tripVC if edit mode on
     var tripImage:UIImage?
     //pass back data to tripVC
-    var newTrip : TripModel!
-    var passData : (()->())?
+    var tripModel : TripModels?
+    var update : (()->())?
+    //coreData
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textFiled.delegate=self
         coverImage.layer.cornerRadius=20
-        //check if edit mode on
-        if let trip = tripForEdit {
+        
+        //check if edit mode on - newTrip will have value
+        if let trip = tripModel {
+            editOn=true
             textFiled.text=trip.name
             coverImage.image=trip.tripImage
             updateCover()
@@ -48,14 +53,23 @@ class AddTripViewController : UIViewController {
     @IBAction func addPressed(_ sender: UIButton) {
         //make sure text filed not empty and change the text filrd to alert the user
         guard textFiled.text != "", let newTripTitle = textFiled.text else {  textFilrdIsEmpty(); return }
-        //save new trip
-        if tripForEdit != nil {
-            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: tripForEdit!.days)
+        
+        if editOn {
+            tripModel?.name=newTripTitle
+            tripModel?.tripImage=tripImage
         }else {
-            newTrip=TripModel(id: UUID(), name: newTripTitle, tripImage: tripImage, days: [])
+            let newTripAdd = TripModels(context: context)
+            newTripAdd.name=newTripTitle
+            newTripAdd.tripImage=tripImage
+            newTripAdd.tripID=UUID()
         }
+        do{
+            try context.save()
+        }catch{
+               print(error)
+            }
         //back to main view and pass the data
-        if passData != nil{ passData!()  }
+        if update != nil{ update!()  }
         
         self.dismiss(animated: true, completion: nil)
     }
