@@ -79,7 +79,7 @@ class AddActivatyViewController: UIViewController {
          dayModel![indexSelect].addToActivityModel(newActivityadd)
          CoreDataBrain.saveData()
     }
-    
+      
     @IBAction func addPressed(_ sender: UIButton) {
         //make sure titleText not nil
         if let title = titleTextFiled.text{

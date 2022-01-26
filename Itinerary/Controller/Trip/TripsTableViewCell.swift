@@ -13,7 +13,7 @@ class TripsTableViewCell: UITableViewCell {
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    override func awakeFromNib() {
+    override func awakeFromNib() { 
         
         super.awakeFromNib()
         // Initialization code

@@ -130,7 +130,7 @@ class AddTripViewController : UIViewController {
 
 //MARK: - UIImagePickerControllerDelegate , UINavigationControllerDelegate
 extension AddTripViewController : UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    
+      
     func updateCover() {
         //remove button from show   
         coverImage.backgroundColor=UIColor.clear

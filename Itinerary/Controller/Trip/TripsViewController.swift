@@ -129,7 +129,7 @@ extension TripsViewController :UITableViewDelegate {
 //MARK: - UITableViewDataSource
 extension TripsViewController:UITableViewDataSource{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 
         return trips.count
     }
     

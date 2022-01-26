@@ -198,7 +198,7 @@ class ActivatyTableViewController: UITableViewController {
     //MARK: - Swipe Actions delete/edit
     //delete
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "delete") { (action, view,performAction: @escaping (Bool) -> Void) in
+        let delete = UIContextualAction(style: .destructive, title: "delete") {  (action, view,performAction: @escaping (Bool) -> Void) in
             //make alert to confirm delete from user
             self.activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexPath.section, dayId: self.dayModel![indexPath.section].dayID! as CVarArg)
             
