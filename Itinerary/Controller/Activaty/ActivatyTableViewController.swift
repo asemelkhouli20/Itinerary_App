@@ -12,7 +12,7 @@ class ActivatyTableViewController: UITableViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var tripModel : TripModels?
+    var tripModel : TripModels? {didSet{fetchDayModel()}}
     //Edit mode to addActavatyVC
     var indexSelectActivatyForEdit:IndexPath?
     //add action for day model on alert add new day make this button isEnabled=false until the user write at lest one character on textFiled for title on alert
@@ -32,7 +32,7 @@ class ActivatyTableViewController: UITableViewController {
     var activatyModel:[ActivityModel]?
     
     func fetchDayModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil){
-        let dayPericate = NSPredicate(format: "childTripModel.tripID MATCHES %@",tripModel!.tripID! as CVarArg)
+        let dayPericate = NSPredicate(format: "childTripModel.tripID == %@",tripModel!.tripID! as CVarArg)
         if let addtionalPericate = pericate {
             request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,dayPericate])
         }
@@ -40,15 +40,15 @@ class ActivatyTableViewController: UITableViewController {
             request.predicate=dayPericate
         }
         do{
-            dayModel = try context.fetch(DayModels.fetchRequest())
+            dayModel = try context.fetch(request)
         }catch{print(error)
             
         }
     }
     
     
-    func fetchActavatyModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
-        let activatyPericate = NSPredicate(format: "childDayModel.dayID MATCHES %@",dayModel![selectDay].dayID! as CVarArg)
+    func fetchActavatyModel(with request : NSFetchRequest<ActivityModel>=ActivityModel.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
+        let activatyPericate = NSPredicate(format: "childDayModel.dayID == %@",dayModel![selectDay].dayID! as CVarArg)
         if let addtionalPericate = pericate {
             request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,activatyPericate])
         }
@@ -57,7 +57,7 @@ class ActivatyTableViewController: UITableViewController {
         }
         request.sortDescriptors = [NSSortDescriptor(key: "activityTag", ascending: true)]
         do{
-            activatyModel = try context.fetch(ActivityModel.fetchRequest())
+            activatyModel = try context.fetch(request)
         }catch{print(error)
             
         }
@@ -138,6 +138,7 @@ class ActivatyTableViewController: UITableViewController {
             }
             //animated
             let indexSet = IndexSet(integer: self.tripModel!.dayModels!.count-1)
+            self.fetchDayModel()
             self.tableView.insertSections(indexSet, with: .left)
         }
         alert.addAction(cancelAction)
@@ -173,8 +174,10 @@ class ActivatyTableViewController: UITableViewController {
             popup.updateTripModel = { //new Activaty
                 self.tripModel=popup.tripModel
                 //animated
-                let indexPath = [IndexPath(row: self.dayModel!.count-1, section: popup.indexSelect)]
-                self.tableView.insertRows(at: indexPath, with: .left)
+                self.fetchDayModel()
+                self.fetchActavatyModel(selectDay: popup.indexSelect)
+                let indexPath = IndexPath(row: self.activatyModel!.count-1, section: popup.indexSelect)
+                self.tableView.insertRows(at: [indexPath], with: .left)
             }
         }
         
@@ -207,6 +210,7 @@ class ActivatyTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Help.activatyCell) as! ActivatyTableViewCell
+        fetchActavatyModel(selectDay: indexPath.section)
         cell.setup(activatyModel: activatyModel![indexPath.row])
         return cell
     }
@@ -227,7 +231,7 @@ class ActivatyTableViewController: UITableViewController {
                 
                 self.activatyModel?.remove(at: indexPath.row)
                 try! self.context.save()
-                self.tableView.reloadData()
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 //self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 performAction(true)
             }
@@ -268,7 +272,7 @@ class ActivatyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         fetchActavatyModel(selectDay: sourceIndexPath.section)
         
-        if sourceIndexPath.section == destinationIndexPath.row {
+        if sourceIndexPath.section == destinationIndexPath.section {
             let oldTag = sourceIndexPath.row
             let newTag = destinationIndexPath.row
             
@@ -285,7 +289,7 @@ class ActivatyTableViewController: UITableViewController {
             }
         }else{
             let actavity = self.activatyModel![sourceIndexPath.row]
-            self.context.delete(self.activatyModel![sourceIndexPath.row])
+            self.dayModel![sourceIndexPath.section].removeFromActivityModel(self.activatyModel![sourceIndexPath.row])
             self.fetchActavatyModel(selectDay: destinationIndexPath.section)
             
             actavity.activityTag=Int64(destinationIndexPath.row)
@@ -297,7 +301,8 @@ class ActivatyTableViewController: UITableViewController {
             
             
         }
-        
+        fetchDayModel()
+        fetchActavatyModel(selectDay: destinationIndexPath.section)
         do{
         try self.context.save()
         }catch{

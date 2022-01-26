@@ -19,7 +19,7 @@ class AddActivatyViewController: UIViewController {
     @IBOutlet var typeActivaty: [UIButton]!
     
     
-    var tripModel:TripModels?
+    var tripModel:TripModels? {didSet{fetchDayModel()}}
     //to Type Activaty by defualt = .fly
     var typeActivatySelecte=0
     //for select from picker day(section) by defualt first item
@@ -37,7 +37,7 @@ class AddActivatyViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     func fetchDayModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil){
-        let dayPericate = NSPredicate(format: "childTripModel.tripID MATCHES %@",tripModel!.tripID! as CVarArg)
+        let dayPericate = NSPredicate(format: "childTripModel.tripID == %@",tripModel!.tripID! as CVarArg)
         if let addtionalPericate = pericate {
             request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,dayPericate])
         }
@@ -45,15 +45,13 @@ class AddActivatyViewController: UIViewController {
             request.predicate=dayPericate
         }
         do{
-            dayModel = try context.fetch(DayModels.fetchRequest())
+            dayModel = try context.fetch(request)
         }catch{print(error)
             
         }
     }
-    
-    
-    func fetchActavatyModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
-        let activatyPericate = NSPredicate(format: "childDayModel.dayID MATCHES %@",dayModel![selectDay].dayID! as CVarArg)
+    func fetchActavatyModel(with request : NSFetchRequest<ActivityModel>=ActivityModel.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
+        let activatyPericate = NSPredicate(format: "childDayModel.dayID == %@",dayModel![selectDay].dayID! as CVarArg)
         if let addtionalPericate = pericate {
             request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,activatyPericate])
         }
@@ -62,7 +60,7 @@ class AddActivatyViewController: UIViewController {
         }
         request.sortDescriptors = [NSSortDescriptor(key: "activityTag", ascending: true)]
         do{
-            activatyModel = try context.fetch(ActivityModel.fetchRequest())
+            activatyModel = try context.fetch(request)
         }catch{print(error)
             
         }

@@ -24,7 +24,7 @@ class AddTripViewController : UIViewController {
     //to save image from picker view or take it from tripVC if edit mode on
     var tripImage:UIImage?
     //pass back data to tripVC
-    var tripModel : TripModels?
+    var tripModel : TripModels? 
     var update : (()->())?
     //coreData
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
