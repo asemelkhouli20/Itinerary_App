@@ -26,6 +26,7 @@ class TripsTableViewCell: UITableViewCell {
         if let image = trip.tripImage {
             backgroundImage.alpha=0.3
             backgroundImage.image=image
+            title.textColor=UIColor.white
             title.backgroundColor=UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
             UIView.animate(withDuration: 1) {
                 self.backgroundImage.alpha=1

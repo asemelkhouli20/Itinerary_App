@@ -19,7 +19,7 @@ class AddActivatyViewController: UIViewController {
     @IBOutlet var typeActivaty: [UIButton]!
     
     
-    var tripModel:TripModels? {didSet{fetchDayModel()}}
+    var tripModel:TripModels? {didSet{dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg) }}
     //to Type Activaty by defualt = .fly
     var typeActivatySelecte=0
     //for select from picker day(section) by defualt first item
@@ -30,41 +30,10 @@ class AddActivatyViewController: UIViewController {
     //Edit mode
     var indexSelectActivityForEdit:IndexPath?
     
-    
     //coreData
     var dayModel:[DayModels]?
     var activatyModel:[ActivityModel]?
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    func fetchDayModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil){
-        let dayPericate = NSPredicate(format: "childTripModel.tripID == %@",tripModel!.tripID! as CVarArg)
-        if let addtionalPericate = pericate {
-            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,dayPericate])
-        }
-        else {
-            request.predicate=dayPericate
-        }
-        do{
-            dayModel = try context.fetch(request)
-        }catch{print(error)
-            
-        }
-    }
-    func fetchActavatyModel(with request : NSFetchRequest<ActivityModel>=ActivityModel.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
-        let activatyPericate = NSPredicate(format: "childDayModel.dayID == %@",dayModel![selectDay].dayID! as CVarArg)
-        if let addtionalPericate = pericate {
-            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,activatyPericate])
-        }
-        else {
-            request.predicate=activatyPericate
-        }
-        request.sortDescriptors = [NSSortDescriptor(key: "activityTag", ascending: true)]
-        do{
-            activatyModel = try context.fetch(request)
-        }catch{print(error)
-            
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,14 +44,14 @@ class AddActivatyViewController: UIViewController {
         
         //to make sure title not empty check MARK -> UITextFiledDelgate
         addButton.isEnabled=false
-        fetchDayModel()
+        dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg)
         //editMode
         if let index = indexSelectActivityForEdit {
             //make addButton Enabled
             addButton.isEnabled=true
             addButton.setTitle("Save", for: .normal)
             //set data to View
-            fetchActavatyModel(selectDay: index.section)
+            activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: index.section, dayId: dayModel![index.section].dayID! as CVarArg)
             let actavity = activatyModel?[index.row]
             titleTextFiled.text=actavity?.title
             subTitleTextFiled.text=actavity?.subTitle
@@ -98,8 +67,8 @@ class AddActivatyViewController: UIViewController {
     }
     
      func addNewActivaty(_ title: String) {
-         fetchActavatyModel(selectDay: indexSelect)
-         let newActivityadd = ActivityModel(context: context)
+         activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexSelect, dayId: dayModel![indexSelect].dayID! as CVarArg)
+         let newActivityadd = ActivityModel(context: CoreDataBrain.context)
          newActivityadd.activityTag=Int64(activatyModel!.count)
          newActivityadd.title=title
          newActivityadd.activatyID=UUID()
@@ -107,11 +76,7 @@ class AddActivatyViewController: UIViewController {
          newActivityadd.typeActivity=Int16(typeActivatySelecte)
          
          dayModel![indexSelect].addToActivityModel(newActivityadd)
-         do{
-         try self.context.save()
-         }catch{
-             print(error)
-         }
+         CoreDataBrain.saveData()
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
@@ -121,19 +86,20 @@ class AddActivatyViewController: UIViewController {
             if let index=indexSelectActivityForEdit{
                 if index.section == indexSelect { //in the same day(section)
                     //just update
-                    fetchActavatyModel(selectDay: indexSelect)
+                    activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexSelect, dayId: dayModel![indexSelect].dayID! as CVarArg)
                     activatyModel![index.row].title = title
                     activatyModel![index.row].subTitle = subTitleTextFiled.text ?? ""
                     activatyModel![index.row].typeActivity = Int16(typeActivatySelecte)
-                    try! context.save()
+                    CoreDataBrain.saveData()
                 }else{//in another day(section)
-                    fetchActavatyModel(selectDay: indexSelect)
+                    activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexSelect, dayId: dayModel![indexSelect].dayID! as CVarArg)
                     //delete the activity from old place
                     dayModel![index.section].removeFromActivityModel(activatyModel![index.row])
-                    try! self.context.save()
+                    CoreDataBrain.saveData()
                     //and make on in new place on day[selectNew]
                     addNewActivaty(title)
                 }
+                
             }else{
                 //just add new activaty to the select day and pass all data
                 addNewActivaty(title)

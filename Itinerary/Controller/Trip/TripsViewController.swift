@@ -10,8 +10,6 @@ import CoreData
 
 class TripsViewController: UIViewController {
     
-   
-  
     @IBOutlet weak var tableView: UITableView!
    
     //data
@@ -20,28 +18,17 @@ class TripsViewController: UIViewController {
     var editOnIndex:Int?
     //index select trip to pass data after modify it by activatyVC
     var indexForSelectTrip:Int?
-
-    //for test
-    var tripTest = [TripModels]()
-    //CoreData
+    //core data
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    func fetchTrip(){
-        do{
-           trips = try context.fetch(TripModels.fetchRequest())
-        }catch{
-            
-        }
-        tableView.reloadData()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate=self
         tableView.dataSource=self
         
-        fetchTrip()
+        trips = CoreDataBrain.fetchTrip()!
+        tableView.reloadData()
     }
     
     //MARK: - Prepare for segue addTripVC/activatyVC
@@ -54,7 +41,7 @@ class TripsViewController: UIViewController {
                 popup.tripModel=self.trips[index]
             }
             popup.update = {
-                self.fetchTrip()
+                self.trips = CoreDataBrain.fetchTrip()!
                 self.tableView.reloadData()
             }
             //make edit mode off
@@ -87,11 +74,7 @@ class TripsViewController: UIViewController {
                 self.trips.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 //save
-                do{
-                try self.context.save()
-                }catch{
-                    print(error)
-                }
+                CoreDataBrain.saveData()
                 
                 actionPerformanc(true)
             }

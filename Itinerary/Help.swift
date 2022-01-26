@@ -22,20 +22,7 @@ class Help {
     static let tripCell = "tripCell"
     static let headerCell = "header"
     static let activatyCell = "activatyCell"
+    static let activatyType = ["fly","Hotel","taxi","restaurant","explore"]
     
-    static func typeActivatyImage(type:ActivatyType)->String{
-        switch type {
-        case .fly:
-            return "fly"
-        case .Hotel:
-            return "Hotel"
-        case .taxi:
-            return "taxi"
-        case .restaurant:
-            return "restaurant"
-        case .explore:
-            return "explore"
-        }
-    }
    
 }

@@ -29,7 +29,7 @@ class ActivatyTableViewCell: UITableViewCell {
     }
 
     func setup(activatyModel:ActivityModel){
-        typeImage.image=UIImage(named: Help.typeActivatyImage(type: ActivatyType(rawValue: Int(activatyModel.typeActivity))!))
+        typeImage.image=UIImage(named: Help.activatyType[Int(activatyModel.typeActivity)])
         titleLable.text = activatyModel.title
         subTitleLable.text = activatyModel.subTitle
     }

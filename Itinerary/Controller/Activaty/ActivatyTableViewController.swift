@@ -12,57 +12,24 @@ class ActivatyTableViewController: UITableViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var tripModel : TripModels? {didSet{fetchDayModel()}}
+    var tripModel : TripModels? {didSet{dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg)}}
     //Edit mode to addActavatyVC
     var indexSelectActivatyForEdit:IndexPath?
     //add action for day model on alert add new day make this button isEnabled=false until the user write at lest one character on textFiled for title on alert
     var addAction:UIAlertAction?
-    //coreData
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //handel mode edit table view by using hold touch the table view and end it with press on done that will hidden when edit table view mode off
     @objc func addAnnotation(press:UILongPressGestureRecognizer) {
         tableView.isEditing=true
         doneButton.title="done"
         addButton.isEnabled=false
-        fetchDayModel()
+        dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg)
     }
     
     //coreData
     var dayModel:[DayModels]?
     var activatyModel:[ActivityModel]?
     
-    func fetchDayModel(with request : NSFetchRequest<DayModels>=DayModels.fetchRequest(),pericate : NSPredicate?=nil){
-        let dayPericate = NSPredicate(format: "childTripModel.tripID == %@",tripModel!.tripID! as CVarArg)
-        if let addtionalPericate = pericate {
-            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,dayPericate])
-        }
-        else {
-            request.predicate=dayPericate
-        }
-        do{
-            dayModel = try context.fetch(request)
-        }catch{print(error)
-            
-        }
-    }
-    
-    
-    func fetchActavatyModel(with request : NSFetchRequest<ActivityModel>=ActivityModel.fetchRequest(),pericate : NSPredicate?=nil,selectDay:Int){
-        let activatyPericate = NSPredicate(format: "childDayModel.dayID == %@",dayModel![selectDay].dayID! as CVarArg)
-        if let addtionalPericate = pericate {
-            request.predicate=NSCompoundPredicate(andPredicateWithSubpredicates: [addtionalPericate,activatyPericate])
-        }
-        else {
-            request.predicate=activatyPericate
-        }
-        request.sortDescriptors = [NSSortDescriptor(key: "activityTag", ascending: true)]
-        do{
-            activatyModel = try context.fetch(request)
-        }catch{print(error)
-            
-        }
-    }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem?.tintColor=Help.tintColor
@@ -71,7 +38,7 @@ class ActivatyTableViewController: UITableViewController {
         let pressHolder = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(press:)))
         pressHolder.minimumPressDuration=1.0
         tableView.addGestureRecognizer(pressHolder)
-        fetchDayModel()
+        dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg)
     }
     
     @IBAction func donePressed(_ sender: UIBarButtonItem) {
@@ -126,19 +93,15 @@ class ActivatyTableViewController: UITableViewController {
         
         //add day
         addAction = UIAlertAction(title: "Add", style: .default) { action in
-            let newDay = DayModels(context: self.context)
+            let newDay = DayModels(context: CoreDataBrain.context)
             newDay.title=title.text!
             newDay.subTitle=subTitle.text!
             newDay.dayID=UUID()
             self.tripModel?.addToDayModels(newDay)
-            do {
-            try self.context.save()
-            }catch{
-                print(error)
-            }
+            CoreDataBrain.saveData()
             //animated
             let indexSet = IndexSet(integer: self.tripModel!.dayModels!.count-1)
-            self.fetchDayModel()
+            self.dayModel = CoreDataBrain.fetchDayModel(tripId: self.tripModel!.tripID! as CVarArg)
             self.tableView.insertSections(indexSet, with: .left)
         }
         alert.addAction(cancelAction)
@@ -174,8 +137,8 @@ class ActivatyTableViewController: UITableViewController {
             popup.updateTripModel = { //new Activaty
                 self.tripModel=popup.tripModel
                 //animated
-                self.fetchDayModel()
-                self.fetchActavatyModel(selectDay: popup.indexSelect)
+                self.dayModel = CoreDataBrain.fetchDayModel(tripId: self.tripModel!.tripID! as CVarArg)
+                self.activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: popup.indexSelect, dayId: self.dayModel![popup.indexSelect].dayID! as CVarArg)
                 let indexPath = IndexPath(row: self.activatyModel!.count-1, section: popup.indexSelect)
                 self.tableView.insertRows(at: [indexPath], with: .left)
             }
@@ -189,7 +152,7 @@ class ActivatyTableViewController: UITableViewController {
     //sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        fetchDayModel()
+        dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg)
         return tripModel?.dayModels?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -205,12 +168,14 @@ class ActivatyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         print(section)
-        fetchActavatyModel(selectDay: section)
+        activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: section, dayId: dayModel![section].dayID! as CVarArg)
+
         return activatyModel?.count ?? 0
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Help.activatyCell) as! ActivatyTableViewCell
-        fetchActavatyModel(selectDay: indexPath.section)
+        activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexPath.section, dayId: dayModel![indexPath.section].dayID! as CVarArg)
+
         cell.setup(activatyModel: activatyModel![indexPath.row])
         return cell
     }
@@ -224,13 +189,14 @@ class ActivatyTableViewController: UITableViewController {
         let delete = UIContextualAction(style: .destructive, title: "delete") { (action, view,performAction: @escaping (Bool) -> Void) in
             //make alert to confirm delete from user
             let alert = UIAlertController(title: "Delete Activaty", message: "are you sure you want delete \(self.activatyModel![indexPath.row].title!)", preferredStyle: .alert)
-            self.fetchActavatyModel(selectDay: indexPath.section)
+            self.activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexPath.section, dayId: self.dayModel![indexPath.section].dayID! as CVarArg)
+
             //delete Action
             let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
                 self.dayModel![indexPath.section].removeFromActivityModel(self.activatyModel![indexPath.row])
                 
                 self.activatyModel?.remove(at: indexPath.row)
-                try! self.context.save()
+                self.dayModel = CoreDataBrain.fetchDayModel(tripId: self.tripModel!.tripID! as CVarArg)
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 //self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 performAction(true)
@@ -270,7 +236,8 @@ class ActivatyTableViewController: UITableViewController {
         return true
     }
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        fetchActavatyModel(selectDay: sourceIndexPath.section)
+        activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: sourceIndexPath.section, dayId: dayModel![sourceIndexPath.section].dayID! as CVarArg)
+
         
         if sourceIndexPath.section == destinationIndexPath.section {
             let oldTag = sourceIndexPath.row
@@ -290,7 +257,8 @@ class ActivatyTableViewController: UITableViewController {
         }else{
             let actavity = self.activatyModel![sourceIndexPath.row]
             self.dayModel![sourceIndexPath.section].removeFromActivityModel(self.activatyModel![sourceIndexPath.row])
-            self.fetchActavatyModel(selectDay: destinationIndexPath.section)
+            self.activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: destinationIndexPath.section, dayId: dayModel![destinationIndexPath.section].dayID! as CVarArg)
+
             
             actavity.activityTag=Int64(destinationIndexPath.row)
             
@@ -301,13 +269,10 @@ class ActivatyTableViewController: UITableViewController {
             
             
         }
-        fetchDayModel()
-        fetchActavatyModel(selectDay: destinationIndexPath.section)
-        do{
-        try self.context.save()
-        }catch{
-            print(error)
-        }
+        dayModel = CoreDataBrain.fetchDayModel(tripId: tripModel!.tripID! as CVarArg)
+        activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: destinationIndexPath.section, dayId: dayModel![destinationIndexPath.section].dayID! as CVarArg)
+
+        CoreDataBrain.saveData()
     }
     
     

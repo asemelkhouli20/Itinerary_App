@@ -26,8 +26,6 @@ class AddTripViewController : UIViewController {
     //pass back data to tripVC
     var tripModel : TripModels? 
     var update : (()->())?
-    //coreData
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,16 +56,12 @@ class AddTripViewController : UIViewController {
             tripModel?.name=newTripTitle
             tripModel?.tripImage=tripImage
         }else {
-            let newTripAdd = TripModels(context: context)
+            let newTripAdd = TripModels(context: CoreDataBrain.context)
             newTripAdd.name=newTripTitle
             newTripAdd.tripImage=tripImage
             newTripAdd.tripID=UUID()
         }
-        do{
-            try context.save()
-        }catch{
-               print(error)
-            }
+        CoreDataBrain.saveData()
         //back to main view and pass the data
         if update != nil{ update!()  }
         

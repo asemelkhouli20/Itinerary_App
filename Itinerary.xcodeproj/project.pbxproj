@@ -14,7 +14,6 @@
 		C2092086279E88E40054D330 /* DayModels+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2092084279E88E40054D330 /* DayModels+CoreDataClass.swift */; };
 		C2092087279E88E40054D330 /* DayModels+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2092085279E88E40054D330 /* DayModels+CoreDataProperties.swift */; };
 		C22FD1BC279BE9250055F3DB /* AddActivatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */; };
-		C244B9C32794DFC9008B8D8C /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C22794DFC9008B8D8C /* TripModel.swift */; };
 		C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */; };
 		C244B9C72794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */; };
 		C244B9CA2794FD5A008B8D8C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C244B9C92794FD5A008B8D8C /* Colors.xcassets */; };
@@ -28,13 +27,11 @@
 		C29EDDB227935771007159FB /* i.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C29EDDB127935771007159FB /* i.xcassets */; };
 		C29EDDB527935771007159FB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C29EDDB327935771007159FB /* LaunchScreen.storyboard */; };
 		C2B417A4279A2DF2004C7F00 /* ActivatyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417A3279A2DF2004C7F00 /* ActivatyTableViewController.swift */; };
-		C2B417A6279A3E4A004C7F00 /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417A5279A3E4A004C7F00 /* DayModel.swift */; };
-		C2B417A8279A3E5A004C7F00 /* ActivatyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417A7279A3E5A004C7F00 /* ActivatyModel.swift */; };
 		C2B417AD279A446B004C7F00 /* ActivatyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417AC279A446B004C7F00 /* ActivatyTableViewCell.swift */; };
 		C2B417B1279A451A004C7F00 /* Activaty.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2B417AF279A451A004C7F00 /* Activaty.storyboard */; };
 		C2B417B3279A53E2004C7F00 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417B2279A53E2004C7F00 /* HeaderTableViewCell.swift */; };
-		C2B417B5279A6E2A004C7F00 /* ActivatyTypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B417B4279A6E2A004C7F00 /* ActivatyTypeEnum.swift */; };
 		C2B417B7279A7F5E004C7F00 /* ActivatyType.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2B417B6279A7F5E004C7F00 /* ActivatyType.xcassets */; };
+		C2D2B79B27A11700000C28C6 /* CoreDataBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */; };
 		C2DED22A279A954200AA81A2 /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DED229279A954200AA81A2 /* Help.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +43,6 @@
 		C2092084279E88E40054D330 /* DayModels+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayModels+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C2092085279E88E40054D330 /* DayModels+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DayModels+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C22FD1BB279BE9250055F3DB /* AddActivatyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivatyViewController.swift; sourceTree = "<group>"; };
-		C244B9C22794DFC9008B8D8C /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
 		C244B9C42794EBF9008B8D8C /* TripsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsTableViewCell.swift; sourceTree = "<group>"; };
 		C244B9C62794F7A4008B8D8C /* MochiyPopPOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MochiyPopPOne-Regular.ttf"; sourceTree = "<group>"; };
 		C244B9C92794FD5A008B8D8C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -61,13 +57,11 @@
 		C29EDDB427935771007159FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C29EDDB627935771007159FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C2B417A3279A2DF2004C7F00 /* ActivatyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatyTableViewController.swift; sourceTree = "<group>"; };
-		C2B417A5279A3E4A004C7F00 /* DayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
-		C2B417A7279A3E5A004C7F00 /* ActivatyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatyModel.swift; sourceTree = "<group>"; };
 		C2B417AC279A446B004C7F00 /* ActivatyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatyTableViewCell.swift; sourceTree = "<group>"; };
 		C2B417B0279A451A004C7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Itinerary/View/Base.lproj/Activaty.storyboard; sourceTree = "<group>"; };
 		C2B417B2279A53E2004C7F00 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
-		C2B417B4279A6E2A004C7F00 /* ActivatyTypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatyTypeEnum.swift; sourceTree = "<group>"; };
 		C2B417B6279A7F5E004C7F00 /* ActivatyType.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ActivatyType.xcassets; sourceTree = "<group>"; };
+		C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataBrain.swift; path = Model/CoreDataBrain.swift; sourceTree = "<group>"; };
 		C2DED229279A954200AA81A2 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,10 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				C28A6A2E279E49D800F6FEE6 /* CoreDataFile */,
-				C244B9C22794DFC9008B8D8C /* TripModel.swift */,
-				C2B417A5279A3E4A004C7F00 /* DayModel.swift */,
-				C2B417A7279A3E5A004C7F00 /* ActivatyModel.swift */,
-				C2B417B4279A6E2A004C7F00 /* ActivatyTypeEnum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,6 +157,7 @@
 				C29EDDB327935771007159FB /* LaunchScreen.storyboard */,
 				C29EDDB627935771007159FB /* Info.plist */,
 				C29EDDAE27935770007159FB /* Itinerary.xcdatamodeld */,
+				C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */,
 			);
 			path = Itinerary;
 			sourceTree = "<group>";
@@ -284,7 +275,6 @@
 				C2B417A4279A2DF2004C7F00 /* ActivatyTableViewController.swift in Sources */,
 				C244B9C52794EBF9008B8D8C /* TripsTableViewCell.swift in Sources */,
 				C244B9D027952722008B8D8C /* AddTripViewController.swift in Sources */,
-				C244B9C32794DFC9008B8D8C /* TripModel.swift in Sources */,
 				C2B417B3279A53E2004C7F00 /* HeaderTableViewCell.swift in Sources */,
 				C29EDDAA27935770007159FB /* TripsViewController.swift in Sources */,
 				C2092082279E878F0054D330 /* TripModels+CoreDataClass.swift in Sources */,
@@ -293,11 +283,9 @@
 				C2092083279E878F0054D330 /* TripModels+CoreDataProperties.swift in Sources */,
 				C29EDDA627935770007159FB /* AppDelegate.swift in Sources */,
 				C209207E279E878F0054D330 /* ActivityModel+CoreDataClass.swift in Sources */,
-				C2B417A6279A3E4A004C7F00 /* DayModel.swift in Sources */,
-				C2B417B5279A6E2A004C7F00 /* ActivatyTypeEnum.swift in Sources */,
 				C2092087279E88E40054D330 /* DayModels+CoreDataProperties.swift in Sources */,
-				C2B417A8279A3E5A004C7F00 /* ActivatyModel.swift in Sources */,
 				C209207F279E878F0054D330 /* ActivityModel+CoreDataProperties.swift in Sources */,
+				C2D2B79B27A11700000C28C6 /* CoreDataBrain.swift in Sources */,
 				C22FD1BC279BE9250055F3DB /* AddActivatyViewController.swift in Sources */,
 				C2092086279E88E40054D330 /* DayModels+CoreDataClass.swift in Sources */,
 				C29EDDA827935770007159FB /* SceneDelegate.swift in Sources */,
