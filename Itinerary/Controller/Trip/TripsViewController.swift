@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import CoreData
+
 
 class TripsViewController: UIViewController {
     
@@ -14,13 +14,14 @@ class TripsViewController: UIViewController {
    
     //data
     var trips = [TripModels]()
+    
     //edit mode on/off if tripForEdit is nill
     var editOnIndex:Int?
+    
     //index select trip to pass data after modify it by activatyVC
     var indexForSelectTrip:Int?
-    //core data
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -40,10 +41,13 @@ class TripsViewController: UIViewController {
             if let index = editOnIndex {
                 popup.tripModel=self.trips[index]
             }
+            
             popup.update = {
+                //take the data from core data
                 self.trips = CoreDataBrain.fetchTrip()!
                 self.tableView.reloadData()
             }
+            
             //make edit mode off
             editOnIndex=nil
         }
@@ -69,7 +73,7 @@ class TripsViewController: UIViewController {
             //delete the elment
             let deleteAction = UIAlertAction(title: "delete", style: .destructive) { action in
                 //delete from core Data
-                self.context.delete(self.trips[indexPath.row])
+                CoreDataBrain.context.delete(self.trips[indexPath.row])
                 //delete from view
                 self.trips.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)

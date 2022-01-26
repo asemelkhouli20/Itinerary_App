@@ -52,12 +52,13 @@ class AddActivatyViewController: UIViewController {
             addButton.setTitle("Save", for: .normal)
             //set data to View
             activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: index.section, dayId: dayModel![index.section].dayID! as CVarArg)
+            
             let actavity = activatyModel?[index.row]
             titleTextFiled.text=actavity?.title
             subTitleTextFiled.text=actavity?.subTitle
             //make activaty Type selected on view
             typeActivaty.forEach({$0.tintColor=UIColor.systemGray})
-            let selectButton = Int(actavity!.activityTag)
+            let selectButton = Int(actavity!.typeActivity)
             typeActivaty.forEach({if $0.tag == selectButton{$0.tintColor=Help.tintColor;typeActivatySelecte=$0.tag}})
             //pass day and make it select it on view
             indexSelect=index.section
@@ -92,11 +93,10 @@ class AddActivatyViewController: UIViewController {
                     activatyModel![index.row].typeActivity = Int16(typeActivatySelecte)
                     CoreDataBrain.saveData()
                 }else{//in another day(section)
-                    activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexSelect, dayId: dayModel![indexSelect].dayID! as CVarArg)
+                    
                     //delete the activity from old place
                     dayModel![index.section].removeFromActivityModel(activatyModel![index.row])
-                    CoreDataBrain.saveData()
-                    //and make on in new place on day[selectNew]
+                    //add to new place
                     addNewActivaty(title)
                 }
                 

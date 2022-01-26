@@ -24,10 +24,12 @@ class TripsTableViewCell: UITableViewCell {
     func setupCell(trip:TripModels){
         title.text = trip.name
         if let image = trip.tripImage {
-            backgroundImage.alpha=0.3
-            backgroundImage.image=image
+            
             title.textColor=UIColor.white
             title.backgroundColor=UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+            
+            backgroundImage.alpha=0.3
+            backgroundImage.image=image
             UIView.animate(withDuration: 1) {
                 self.backgroundImage.alpha=1
             }
@@ -40,11 +42,4 @@ class TripsTableViewCell: UITableViewCell {
             title.textColor=Help.boredColor
         }
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
 }

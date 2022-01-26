@@ -61,7 +61,7 @@
 		C2B417B0279A451A004C7F00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Itinerary/View/Base.lproj/Activaty.storyboard; sourceTree = "<group>"; };
 		C2B417B2279A53E2004C7F00 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
 		C2B417B6279A7F5E004C7F00 /* ActivatyType.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ActivatyType.xcassets; sourceTree = "<group>"; };
-		C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CoreDataBrain.swift; path = Model/CoreDataBrain.swift; sourceTree = "<group>"; };
+		C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBrain.swift; sourceTree = "<group>"; };
 		C2DED229279A954200AA81A2 /* Help.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				C28A6A2E279E49D800F6FEE6 /* CoreDataFile */,
+				C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,7 +158,6 @@
 				C29EDDB327935771007159FB /* LaunchScreen.storyboard */,
 				C29EDDB627935771007159FB /* Info.plist */,
 				C29EDDAE27935770007159FB /* Itinerary.xcdatamodeld */,
-				C2D2B79A27A11700000C28C6 /* CoreDataBrain.swift */,
 			);
 			path = Itinerary;
 			sourceTree = "<group>";
