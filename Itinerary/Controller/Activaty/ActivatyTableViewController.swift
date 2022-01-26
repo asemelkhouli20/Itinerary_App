@@ -212,7 +212,6 @@ class ActivatyTableViewController: UITableViewController {
                 
                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                
-                //self.tableView.deleteRows(at: [indexPath], with: .automatic)
                 performAction(true)
                 
             }

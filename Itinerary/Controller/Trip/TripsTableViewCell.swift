@@ -14,6 +14,7 @@ class TripsTableViewCell: UITableViewCell {
     @IBOutlet weak var backgroundImage: UIImageView!
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         // Initialization code
         cellView.layer.cornerRadius = 20

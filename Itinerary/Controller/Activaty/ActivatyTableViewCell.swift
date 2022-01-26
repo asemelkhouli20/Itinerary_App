@@ -17,6 +17,7 @@ class ActivatyTableViewCell: UITableViewCell {
     
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         additionImage.layer.borderWidth = 2
         additionImage.layer.masksToBounds = false
@@ -29,6 +30,7 @@ class ActivatyTableViewCell: UITableViewCell {
     }
 
     func setup(activatyModel:ActivityModel){
+        
         typeImage.image=UIImage(named: Help.activatyType[Int(activatyModel.typeActivity)])
         titleLable.text = activatyModel.title
         subTitleLable.text = activatyModel.subTitle

@@ -86,7 +86,7 @@ class AddActivatyViewController: UIViewController {
             //check for edit mode
             if let index=indexSelectActivityForEdit{
                 if index.section == indexSelect { //in the same day(section)
-                    //just update
+                    //just update   
                     activatyModel = CoreDataBrain.fetchActavatyModel(selectDay: indexSelect, dayId: dayModel![indexSelect].dayID! as CVarArg)
                     activatyModel![index.row].title = title
                     activatyModel![index.row].subTitle = subTitleTextFiled.text ?? ""

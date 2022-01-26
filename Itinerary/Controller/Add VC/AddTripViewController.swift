@@ -132,7 +132,7 @@ class AddTripViewController : UIViewController {
 extension AddTripViewController : UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     func updateCover() {
-        //remove button from show
+        //remove button from show   
         coverImage.backgroundColor=UIColor.clear
         addimageButton.tintColor=UIColor.clear
         //update lable

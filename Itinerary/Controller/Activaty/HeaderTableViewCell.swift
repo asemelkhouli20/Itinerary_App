@@ -17,6 +17,7 @@ class HeaderTableViewCell: UITableViewCell {
     }
 
     func setup(dayModel:DayModels){
+        
         title.text=dayModel.title
         subTitle.text=dayModel.subTitle
     }
