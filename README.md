@@ -1,6 +1,6 @@
 # Itinerary_App
 
-this app you recoard all your trip track the when you in your taip you tracking your trip with this app and more theng cool about this app it work offline and all data are saved off-line with core data inide your phone get fun with your trip
+this app you recoard all your trip track then when you in your taip you tracking your trip with this app and more theng cool about this app it work offline and all data are saved off-line with core data inide your phone get fun with your trip
 
 and this app all functionality in light mode
 
