@@ -2,7 +2,7 @@
 //  DayModels+CoreDataClass.swift
 //  Itinerary
 //
-//  Created by Asem on 24/01/2022.
+//  Created by Asem on 28/01/2022.
 //
 //
 

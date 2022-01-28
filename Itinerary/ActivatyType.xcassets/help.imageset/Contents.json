@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icons8-hotel_star.png",
+      "filename" : "icons8-help.png",
       "idiom" : "universal"
     }
   ],
@@ -10,7 +10,6 @@
     "version" : 1
   },
   "properties" : {
-    "auto-scaling" : "auto",
     "template-rendering-intent" : "template"
   }
 }

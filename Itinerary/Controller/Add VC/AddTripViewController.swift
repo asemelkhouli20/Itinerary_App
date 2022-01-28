@@ -37,6 +37,7 @@ class AddTripViewController : UIViewController {
             editOn=true
             textFiled.text=trip.name
             coverImage.image=trip.tripImage
+            tripImage=trip.tripImage
             updateCover()
             navgationTitle.text="Edit Trip"
             doneButtone.setTitle("Save", for: .normal)

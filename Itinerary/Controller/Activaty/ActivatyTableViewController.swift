@@ -105,7 +105,7 @@ class ActivatyTableViewController: UITableViewController {
             newDay.title=title.text!
             newDay.subTitle=subTitle.text!
             newDay.dayID=UUID()
-            
+            newDay.tagDay=Int64(self.dayModel!.count)
             //save it in core data
             self.tripModel?.addToDayModels(newDay)
             CoreDataBrain.saveData()

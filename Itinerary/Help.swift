@@ -22,7 +22,6 @@ class Help {
     static let tripCell = "tripCell"
     static let headerCell = "header"
     static let activatyCell = "activatyCell"
-    static let activatyType = ["fly","Hotel","taxi","restaurant","explore"]
+    static let activatyType = ["fly","Hotel","taxi","restaurant","explore","help"]
     
-   
 }

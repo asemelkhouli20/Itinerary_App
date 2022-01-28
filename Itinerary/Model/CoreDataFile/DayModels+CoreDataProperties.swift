@@ -2,7 +2,7 @@
 //  DayModels+CoreDataProperties.swift
 //  Itinerary
 //
-//  Created by Asem on 24/01/2022.
+//  Created by Asem on 28/01/2022.
 //
 //
 
@@ -19,6 +19,7 @@ extension DayModels {
     @NSManaged public var dayID: UUID?
     @NSManaged public var subTitle: String?
     @NSManaged public var title: String?
+    @NSManaged public var tagDay: Int64
     @NSManaged public var activityModel: NSSet?
     @NSManaged public var childTripModel: TripModels?
 

@@ -41,7 +41,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
                                                             <color key="backgroundColor" name="backgroundCard"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzb-FX-SYH">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="xzb-FX-SYH">
                                                             <rect key="frame" x="0.0" y="0.0" width="370" height="100"/>
                                                             <color key="backgroundColor" red="0.1097805873" green="0.1097377911" blue="0.1176479533" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <fontDescription key="fontDescription" name="MochiyPopPOne-Regular" family="Mochiy Pop P One" pointSize="30"/>

@@ -20,14 +20,20 @@ class TripsViewController: UIViewController {
     
     //index select trip to pass data after modify it by activatyVC
     var indexForSelectTrip:Int?
-    
+    //to defualt tutorial 
+    let userInfo = UserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate=self
         tableView.dataSource=self
-        
+        if !userInfo.bool(forKey: "userInfo") {
+            userInfo.set(true, forKey: "userInfo")
+            let tutorial = Tutorial()
+            tutorial.markData()
+            tutorial.tutorial()
+        }
         trips = CoreDataBrain.fetchTrip()!
         tableView.reloadData()
     }

@@ -11,6 +11,7 @@
     <entity name="DayModels" representedClassName="DayModels" syncable="YES">
         <attribute name="dayID" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="subTitle" optional="YES" attributeType="String"/>
+        <attribute name="tagDay" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="activityModel" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActivityModel" inverseName="childDayModel" inverseEntity="ActivityModel"/>
         <relationship name="childTripModel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripModels" inverseName="dayModels" inverseEntity="TripModels"/>
@@ -23,7 +24,7 @@
     </entity>
     <elements>
         <element name="ActivityModel" positionX="-36" positionY="27" width="128" height="119"/>
-        <element name="DayModels" positionX="-54" positionY="9" width="128" height="104"/>
+        <element name="DayModels" positionX="-54" positionY="9" width="128" height="119"/>
         <element name="TripModels" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>
