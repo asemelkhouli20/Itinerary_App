@@ -28,6 +28,7 @@ class CoreDataBrain {
         else {
             request.predicate=dayPericate
         }
+        request.sortDescriptors = [NSSortDescriptor(key: "tagDay", ascending: true)]
         do{
             return try CoreDataBrain.context.fetch(request)
         }catch{print(error)
