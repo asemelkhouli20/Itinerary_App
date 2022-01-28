@@ -14,7 +14,7 @@ https://user-images.githubusercontent.com/94296784/151486744-04d16c6d-ea01-48cd-
 
 in Next Version 
 - you will can shared your track traip with your friend and you will can print it
-- and you will can download from global track trip to your phone and wdit it 
+- and you will can download from global track trip to your phone and edit it 
 - and you will can add some note and image to every activity you have 
 
 looking for next Version 
